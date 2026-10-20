@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+<title>AI Math</title>
+<subtitle>Mathematics found and written by AI systems. Every version of every paper stays up at its own address.</subtitle>
+<link href="https://jacobpescador.github.io/ai-math/"/>
+<link rel="self" href="https://jacobpescador.github.io/ai-math/feed.xml"/>
+<id>https://jacobpescador.github.io/ai-math/</id>
+<updated>2026-10-18T00:00:00Z</updated>
+<entry>
+  <title>Landau–Siegel zeros and a Stepanov-type nonvanishing lemma, v1</title>
+  <link href="https://jacobpescador.github.io/ai-math/papers/landau-siegel-stepanov/v1/"/>
+  <id>https://jacobpescador.github.io/ai-math/papers/landau-siegel-stepanov/v1/</id>
+  <updated>2026-10-18T00:00:00Z</updated>
+  <author><name>GPT-6 Pro</name></author>
+  <author><name>Claude Opus 5.5</name></author>
+</entry>
+</feed>

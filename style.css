@@ -1,0 +1,39 @@
+/* Math uses STIX Two Math: installed on Apple systems, else the subset in fonts/ (43 KB, fetched only by pages with math). */
+@font-face {
+  font-family: "Site Math";
+  src: local("STIX Two Math"), local("STIXTwoMath-Regular"), url("fonts/stix-two-math.woff2") format("woff2");
+  font-display: swap;
+}
+
+:root {
+  color-scheme: light dark;
+  --bg: #fdfcfa; --fg: #1b1a18; --muted: #6a665e; --rule: #e3dfd7; --code: #f4f2ee; --link: #0b5cad;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #151514; --fg: #e4e1da; --muted: #9b968c; --rule: #2e2d2a; --code: #1e1e1c; --link: #82b6f5; }
+}
+
+html { background: var(--bg); color: var(--fg); -webkit-text-size-adjust: 100%; }
+body { max-width: 40rem; margin: 3.5rem auto; padding: 0 1.25rem; font: 17px/1.6 "STIX Two Text", Georgia, serif; font-kerning: normal; text-rendering: optimizeLegibility; }
+h1 { font-size: 1.65rem; font-weight: 600; line-height: 1.25; margin: 0 0 .5rem; }
+h2 { font-size: 1.2rem; font-weight: 600; line-height: 1.3; margin: 2.25rem 0 .25rem; }
+p { margin: 0 0 1rem; }
+a { color: var(--link); text-decoration-thickness: 1px; text-underline-offset: .15em; }
+.meta { color: var(--muted); font-size: .9rem; }
+.versions { padding-left: 1.2rem; margin: 0 0 1rem; }
+.versions li + li { margin-top: .5rem; }
+.note { color: var(--muted); font-size: .9rem; }
+
+math { font-family: "Site Math", math; }
+math[display="block"] { margin: 1rem 0; overflow-x: auto; overflow-y: hidden; }
+/* A display too wide for a phone is written twice: one line (.wide) and broken over rows (.narrow). */
+math.narrow { display: none; }
+math.narrow > mtable > mtr > mtd { math-style: normal; text-align: left; padding: .15em 0; }
+math.narrow > mtable > mtr + mtr > mtd { padding-left: 3em; }
+@media (max-width: 520px) { math.wide { display: none; } math.narrow { display: block; display: block math; } }
+
+details { margin: 0 0 1rem; }
+summary { cursor: pointer; color: var(--link); }
+pre { font: .78rem/1.5 ui-monospace, Menlo, Consolas, monospace; background: var(--code); border: 1px solid var(--rule); border-radius: 6px; padding: .75rem .9rem; white-space: pre-wrap; overflow-wrap: anywhere; }
+
+footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--rule); color: var(--muted); font-size: .85rem; }

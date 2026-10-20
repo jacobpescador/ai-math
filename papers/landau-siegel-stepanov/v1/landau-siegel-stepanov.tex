@@ -1,0 +1,280 @@
+\documentclass[11pt]{amsart}
+\usepackage[margin=1in]{geometry}
+\usepackage{amssymb,mathtools}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\cO}{\mathcal{O}}
+\newcommand{\cM}{\mathcal{M}}
+\newcommand{\sd}{\sqrt{d}}
+
+\title{Landau--Siegel zeros and a Stepanov-type nonvanishing lemma}
+\author{GPT-6 Pro and Claude Opus 5.5}
+\date{18 October 2026}
+
+\begin{document}
+
+\begin{abstract}
+Let $\chi$ be a primitive real Dirichlet character of conductor $q$. We show that
+\[
+\sum_{p\le X,\ \chi(p)=-1}\frac{\log p}p\le\frac12\log X+\frac12\log q+\log\log X+O(1)
+\]
+uniformly in $X\ge3$ and $q$; consequently $L(s,\chi)$ has no Landau--Siegel zero. This is a variant
+of the OpenAI proof, following Green and Kerr. The key arithmetic observation is that Frobenius at a prime
+inert in the quadratic field of $\chi$ is conjugation. At the small inert primes it makes a certain
+algebraic integer highly divisible; at one larger inert prime, through a short Stepanov-type
+multiplicity argument that replaces the resultant and zero-estimate arguments of Green and Kerr, it
+shows that this integer is nonzero. This manuscript
+was written entirely by AI systems; see the note at the end.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+Let $\chi$ be a primitive real Dirichlet character of conductor $q\ge3$, and let $S_\pm(X)$ denote
+the sum of $(\log p)/p$ over the primes $p\le X$ with $\chi(p)=\pm1$. Implied constants are
+absolute.
+
+\begin{theorem}\label{thm:main}
+For every $X\ge3$, \ $S_-(X)\le\frac12\log X+\frac12\log q+\log\log X+O(1)$.
+\end{theorem}
+
+\begin{corollary}\label{cor:siegel}
+There is an absolute constant $c>0$ such that every zero $\beta\in(0,1)$ of $L(s,\chi)$ satisfies
+$(1-\beta)\log q\ge c$.
+\end{corollary}
+
+For fixed $q$ one has $S_-(X)=\frac12\log X+O_q(1)$, by Mertens' theorem and
+$\sum_{p\le X}\chi(p)(\log p)/p=O_q(1)$ (a consequence of $L(1,\chi)\ne0$). So the coefficient
+$\frac12$ of $\log X$ cannot be lowered, and the content of Theorem~\ref{thm:main} is its uniformity
+in $q$; a real zero near $1$ would make $S_-(X)$ nearly $\log X$ for $X$ a large
+power of $q$ (\S\ref{sec:cor}).
+
+\emph{The idea.} Write $\chi=(d/\cdot)$ with $d$ a fundamental discriminant, $|d|=q$, and for
+$\alpha=x+y\sd$ put $\alpha'=x-y\sd$. If $\chi(p)=-1$, conjugation on $\Z[\sd]/p$ is the
+Frobenius, so at every point $(z,w)=(\alpha,\alpha')$
+\begin{equation}\label{eq:fact}
+w\equiv z^p\pmod p,\qquad\text{and}\qquad\partial_z^\kappa(z^p-w)\equiv0\pmod p\quad(\kappa\ge1).
+\end{equation}
+Let $\delta$ be a nonzero minor of the matrix of $z$-derivatives of monomials $z^iw^j$ at the points
+$(\alpha,\alpha')$, $\alpha$ in an $N\times N$ box. At each small inert prime $p$,~\eqref{eq:fact}
+makes $\delta$ divisible by about $p^{I/p}$, where $I$ is the total $z$-degree. At one inert prime
+$p_0$ above all the $z$-degrees,~\eqref{eq:fact} shows that such a $\delta$ exists: modulo $p_0$ the
+points lie on the graph $w=z^{p_0}$ of Frobenius, and a vanishing combination of rows would be a
+curve $F=0$ meeting that graph with multiplicity at least $t$ (the number of derivatives) at each
+of $p_0$ points, whereas $F(z,z^{p_0})$ has degree below $p_0t$. A box of side $N\approx\sqrt{p_0}$
+supplies the $p_0$ points.
+Ignoring the costs of the $w$-degrees and of differentiation, $|\delta|$ is then at most about $H^I$
+with $H\approx N\sqrt q$, and comparison gives
+$\sum_{p\ \mathrm{inert}}(\log p)/p\lesssim\log H\approx\frac12\log p_0+\frac12\log q$. For a split
+prime Frobenius is the identity and $\partial_z(z^p-z)\equiv-1$ is a unit, so only $S_-$ is controlled; that is the side a Landau--Siegel
+zero inflates.
+
+\emph{Earlier work.} The strategy---evaluating polynomials at Frobenius-twisted points of a box,
+and comparing the archimedean size of the resulting algebraic integer with its divisibility by inert
+primes---is that of the OpenAI proof~\cite{OpenAI} (over $\Q(\sd,\sqrt2)$), as expounded by
+Banks~\cite{Banks}; we follow the variants of Kerr~\cite{Kerr} and Green~\cite{Green}. From Green we
+take the field $\Q(\sd)$, the grid of points $(\alpha,\alpha')$, the derivative evaluations, the
+height bound, the Leibniz-rule divisibility of the differentiated rows, and (as remarked
+in~\cite[\S2]{Green}) the use of a nonsingular minor in place of a Gram determinant; from Kerr, the weighted
+monomials and the unitriangular change of basis to $z^v(z^p-w)^h$, which~\cite[Lemma~5.1]{Green}
+also uses in truncated, unweighted form. The grid has side about $\sqrt{p_0}$, as in~\cite{Green}
+(where $N=2X^{1/2}$).
+
+The main change is the nonvanishing argument (Lemma~\ref{lem:stepanov}): the multiplicity argument at
+the heart of Stepanov's method~\cite{Stepanov}, applied at an auxiliary inert prime. It plays the
+role of Masser's zero estimate~\cite{Masser} in~\cite{Kerr} and of the resultant argument
+of~\cite[Lemma~3.1, Appendix~A]{Green}. Green's lemma is more general: it applies to a much broader
+class of point configurations under geometric hypotheses, showing that the nonvanishing is a generic phenomenon and that the
+arithmetic lies in the divisibility. Lemma~\ref{lem:stepanov} instead exploits the arithmetic of these
+particular points; its merit is brevity, and that it reuses the fact~\eqref{eq:fact} behind the
+divisibility. Further, because
+Kerr's weighted monomials need no truncation in the change of basis, the weight $\ell$ may grow like
+$\log X$; this makes the costs of the $w$-degrees and of differentiation negligible and gives a bound
+uniform in $X$ and $q$, a modest sharpening of the bound $(\frac12+O(1/C))\log X+O_C(1)$ for
+$X=q^C$ in~\cite[Theorem~1.1]{Green}.
+
+\section{Two lemmas}
+
+Let $\cO=\Z[\sd]=\Z\oplus\Z\sd$.
+
+\begin{lemma}\label{lem:frob}
+Let $p$ be an odd prime with $\chi(p)=-1$. Then $\cO/p\cO$ is a field with $p^2$ elements, and
+$\alpha^p\equiv\alpha'\pmod{p\cO}$ for every $\alpha\in\cO$.
+\end{lemma}
+
+\begin{proof}
+As $d$ is not a square modulo $p$, $\cO/p\cO\cong\F_p[T]/(T^2-d)$ is a field; and by Euler's
+criterion $(x+y\sd)^p\equiv x+yd^{(p-1)/2}\sd\equiv x-y\sd$.
+\end{proof}
+
+\begin{lemma}[after Stepanov~\cite{Stepanov}]\label{lem:stepanov}
+Let $k$ be a field of characteristic $p$, let $1\le t\le p$, and let $F\in k[z,w]$ have
+$\deg_zF<p$ and $\deg_wF<t$. If $(\partial_z^\kappa F)(a,a^p)=0$ for $0\le\kappa<t$ at $p$ distinct
+points $a\in k$, then $F=0$.
+\end{lemma}
+
+\begin{proof}
+Suppose $F\ne0$ and put $G(z)=F(z,z^p)$. The monomial $z^iw^j$ becomes $z^{i+pj}$, and these
+exponents are distinct because $0\le i<p$; so $G\ne0$ and $\deg G\le(p-1)+p(t-1)=pt-1$. As the
+derivative of $z^p$ vanishes in characteristic $p$, the chain rule gives
+$G^{(\kappa)}(z)=(\partial_z^\kappa F)(z,z^p)$, so $G^{(\kappa)}(a)=0$ for $\kappa<t$ at each of the
+$p$ points. Since $\kappa!\ne0$ in $k$ for $\kappa<t\le p$, Taylor expansion at $a$ shows that
+$(z-a)^t$ divides $G$. Hence $\deg G\ge pt$, a contradiction.
+\end{proof}
+
+Geometrically, in characteristic $p$ the derivative $\partial_z$ differentiates along the graph
+$w=z^p$ of Frobenius, and the proof counts the intersections of $F=0$ with that graph.
+
+\section{Proof of Theorem~\ref{thm:main}}
+
+\begin{proposition}\label{prop:ell}
+Let $p_0\ge5$ be a prime with $\chi(p_0)=-1$, put $D=p_0-1$, and let $\ell\ge2$ be an integer. Then
+\[
+S_-(D)\le\Bigl(\frac12+\frac{7}{2\ell}\Bigr)\log D+\frac{\ell+1}{2\ell}\log q+\log\ell+O(1).
+\]
+\end{proposition}
+
+\begin{proof}[Deduction of Theorem~\ref{thm:main}]
+If $X<q$, Mertens' theorem gives $S_-(X)\le\log X+O(1)\le\frac12\log X+\frac12\log q+O(1)$. Let
+$X\ge q$, and let $p_0$ be the largest prime $\le X$ with $\chi(p_0)=-1$; if there is none, or
+$p_0\le3$, then $S_-(X)=O(1)$. Otherwise $S_-(X)=S_-(p_0-1)+(\log p_0)/p_0$, since by
+maximality the primes in $(p_0,X]$ contribute nothing. Apply
+Proposition~\ref{prop:ell} with $\ell=\lceil\log X\rceil\ge2$: as $\log D\le\log X$ and
+$\log q\le\log X\le\ell$, we have $\frac7{2\ell}\log D\le\frac72$,
+$\frac{\ell+1}{2\ell}\log q\le\frac12\log q+\frac12$, and $\log\ell\le\log\log X+\log2$.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{prop:ell}]
+\emph{Monomials.} Let $s=\lfloor D/\ell\rfloor$, and let $\cM$ be the set of $(i,j)\in\Z_{\ge0}^2$
+with $i+\ell j\le D$; thus $i\le D<p_0$ and $j\le s$. Put $m=|\cM|$, $I=\sum_\cM i$ and
+$J=\sum_\cM j$. As in~\cite{Kerr} (where $\ell=8$), trading $z^p$ for $w$ lowers the weight $i+\ell j$ when
+$p>\ell$, which keeps the change of basis below inside $\cM$. Reflecting $i\mapsto D-\ell j-i$ for
+each fixed $j$ gives $2I+\ell J=Dm$. Writing $i=\ell u+r$ with $0\le r<\ell$, for each $r$ the
+pairs $(u,j)$ fill a triangle $u+j\le\lfloor(D-r)/\ell\rfloor$, symmetric in $u$ and $j$; so
+$I\ge\ell J$. Therefore
+\begin{equation}\label{eq:counts}
+J\le I/\ell,\qquad m\le3I/D.
+\end{equation}
+
+\emph{A nonzero algebraic integer.} Let $N=\lceil\sqrt{p_0}\,\rceil$, and let $M$ be the matrix over
+$\cO$ with rows indexed by $\cM$, ordered by increasing $i$, columns indexed by $(x,y,\kappa)$ with
+$0\le x,y<N$ and $0\le\kappa\le s$, and entries
+\[
+M_{(i,j),(x,y,\kappa)}=\partial_z^\kappa\bigl(z^iw^j\bigr)(\alpha,\alpha')
+=(i)_\kappa\,\alpha^{i-\kappa}\alpha'^{\,j}\quad(\kappa\le i),\qquad\alpha=x+y\sd,
+\]
+and $0$ if $\kappa>i$; here $(i)_\kappa=i(i-1)\cdots(i-\kappa+1)$. Its rows are linearly
+independent modulo $p_0$. Indeed, a relation among them over the field $\cO/p_0\cO$ is a polynomial
+$F=\sum_\cM c_{ij}z^iw^j$ with $(\partial_z^\kappa F)(\bar\alpha,\bar\alpha^{p_0})=0$ for
+$\kappa\le s$ (Lemma~\ref{lem:frob}) at the $N^2\ge p_0$ reductions $\bar\alpha$, which are distinct
+because $N<p_0$ and $1,\sd$ are linearly independent over $\F_{p_0}$. As $\deg_zF\le D<p_0$,
+$\deg_wF\le s$ and $s+1\le p_0$, Lemma~\ref{lem:stepanov} with $t=s+1$ gives $F=0$. Choose once and
+for all an $m\times m$ minor $\delta$ of $M$ that is nonzero modulo $p_0$. Then $\delta\ne0$. Let $\delta'$ be its
+image under $\sd\mapsto-\sd$, which is the same minor with $\alpha$ and $\alpha'$ interchanged; then
+$n=|\delta\delta'|=|N_{\Q(\sd)/\Q}(\delta)|$ is a positive integer.
+
+\emph{Its size.} Put $H=2N\sqrt q$ (as in~\cite[\S4]{Green}). As $|\alpha|,|\alpha'|\le N(1+\sqrt q)\le H$ and
+$(i)_\kappa\le D^s$, every entry in row $(i,j)$ of either matrix has modulus at most
+$D^sH^{i+j}$, and Hadamard's inequality gives
+\begin{equation}\label{eq:upper}
+\log n\le2(I+J)\log H+2ms\log D+m\log m.
+\end{equation}
+
+\emph{Its divisibility.} Let $p$ be a prime with $\ell<p\le D$ and $\chi(p)=-1$. For $(i,j)\in\cM$
+write $i=ph+v$ with $0\le v<p$, and replace the row of $z^iw^j$ by that of
+\[
+z^v(z^p-w)^hw^j=z^iw^j+\sum_{\nu=1}^{h}(-1)^\nu\tbinom h\nu z^{i-p\nu}w^{j+\nu}
+\]
+The monomials in the sum have smaller $z$-degree and smaller weight
+$i+\ell j-(p-\ell)\nu$, so they lie in $\cM$. As the rows are ordered by increasing $i$, this adds to each row integer
+multiples of rows of smaller $i$, so it does not change $\delta$, which uses every row. By Leibniz's rule,
+$\partial_z^\kappa\bigl(z^v(z^p-w)^hw^j\bigr)$ is an integer combination of products each containing
+$h$ factors $\partial_z^\lambda(z^p-w)$ with $\lambda\ge0$. Each such factor lies in $p\cO$ at
+$(\alpha,\alpha')$: for $\lambda=0$ by Lemma~\ref{lem:frob}; for $1\le\lambda\le p$ because
+$\partial_z^\lambda z^p=(p)_\lambda z^{p-\lambda}$ and $p\mid(p)_\lambda$; and for $\lambda>p$ it is
+zero. So the
+new row of $(i,j)$ lies in $p^h\cO$, and therefore $\delta\in p^{E_p}\cO$; conjugating, $\delta'\in p^{E_p}\cO$, so $p^{2E_p}\mid n$, where
+\begin{equation}\label{eq:div}
+E_p=\sum_{(i,j)\in\cM}\Bigl\lfloor\frac ip\Bigr\rfloor\ge\frac Ip-m.
+\end{equation}
+
+\emph{Comparison.} The coprime $p^{2E_p}$ all divide $n$, so by~\eqref{eq:div} and Chebyshev's bound
+$\sum_{p\le D}\log p\ll D$,
+\[
+2I\sum_{\substack{\ell<p\le D\\ \chi(p)=-1}}\frac{\log p}p\le2\sum_pE_p\log p+O(mD)\le\log n+O(mD).
+\]
+Insert~\eqref{eq:upper} and divide by $2I$. By~\eqref{eq:counts} and $m\le(D+1)^2$, we have
+$(I+J)/I\le1+\frac1\ell$, $ms/I\le\frac3\ell$, and $(m\log m)/I$, $mD/I$ are $O(1)$. The
+primes $p\le\ell$ add at most $\log\ell+O(1)$ to $S_-(D)$, by Mertens' theorem; so
+\[
+S_-(D)\le\log H+\frac{\log H+3\log D}{\ell}+\log\ell+O(1).
+\]
+Here $\log H$ is the height of the grid, the terms with $1/\ell$ are the costs of the $w$-degrees and
+of differentiation, and $\log\ell$ accounts for the small primes set aside. Since $N\le2\sqrt D$, we
+have $\log H\le\frac12\log(Dq)+\log4$, and the proposition follows.
+\end{proof}
+
+%\clearpage
+\section{Proof of Corollary~\ref{cor:siegel}}\label{sec:cor}
+
+This deduction is standard (cf.~\cite[Lemma~1]{Kerr}); we include it for completeness. Let $L(\beta,\chi)=0$ with $0<\beta<1$, let $X\ge3$, and put $\sigma=1+1/\log X\in(1,2]$. Taking
+real parts in the formula for $L'/L$ that comes from the Hadamard product~\cite[p.~89]{Davenport},
+\[
+-\frac{L'}{L}(\sigma,\chi)=\frac12\log\frac q\pi
++\frac12\frac{\Gamma'}{\Gamma}\Bigl(\frac{\sigma+\mathfrak a}2\Bigr)
+-\sum_\rho\operatorname{Re}\frac1{\sigma-\rho},\qquad \chi(-1)=(-1)^{\mathfrak a},
+\]
+where $\rho$ runs over the nontrivial zeros. The gamma term is bounded, and every term of the sum
+is positive because $\operatorname{Re}\rho\le1<\sigma$. Keeping only $\rho=\beta$, adding
+$-\frac{\zeta'}{\zeta}(\sigma)\le\frac1{\sigma-1}+O(1)$, and using
+$\frac1{\sigma-1}-\frac1{\sigma-\beta}\le\frac{1-\beta}{(\sigma-1)^2}=(1-\beta)(\log X)^2$,
+\[
+\sum_{n\ge1}\frac{\Lambda(n)(1+\chi(n))}{n^\sigma}\le\tfrac12\log q+(1-\beta)(\log X)^2+O(1).
+\]
+All terms on the left are nonnegative, and a prime $p\le X$ with $\chi(p)=1$ contributes
+$2(\log p)p^{-\sigma}\ge2e^{-1}(\log p)/p$. Hence
+$S_+(X)\le\frac e2(1-\beta)(\log X)^2+O(\log q)$.
+On the other hand, the primes with $\chi(p)=0$ divide $q$, so Mertens' theorem gives
+$S_+(X)+S_-(X)\ge\log X-\log q-O(1)$. Combining these with Theorem~\ref{thm:main} and
+$\log\log X\le\frac14\log X+O(1)$,
+\[
+\tfrac14\log X\le C\log q+\tfrac e2(1-\beta)(\log X)^2
+\]
+for an absolute constant $C$. Taking $X=q^\lambda$ with $\lambda=\max(1,8C)$ gives
+$(1-\beta)\log q\ge1/(4e\lambda)$.\qed
+
+\subsection*{Authorship}
+This manuscript is AI-generated. Everything in it that is not taken from the cited works---in
+particular the use of an auxiliary inert prime and the arrangement of the proof---was found and
+written by AI systems (GPT-6 Pro and Claude Opus 5.5), building on~\cite{OpenAI,Banks,Green,Kerr}. The human
+who prepared the manuscript contributed no mathematical arguments, and only passed material
+between the systems and asked for revisions. The proofs have been checked by several independent
+AI reviews, not by a human. The manuscript has not been refereed.
+
+\begin{thebibliography}{9}\footnotesize\raggedright\setlength{\itemsep}{0pt}
+\bibitem{Banks} W.\,D. Banks, \emph{On the OpenAI proof that Landau--Siegel zeros do not exist},
+preprint, 2026, arXiv:2610.15483.
+\bibitem{Davenport} H. Davenport, \emph{Multiplicative Number Theory}, 2nd ed., revised by
+H.\,L. Montgomery, Graduate Texts in Mathematics 74, Springer, 1980.
+\bibitem{Green} B. Green, \emph{On Landau--Siegel zeros}, preprint, 2026, hexagon:2610.00311v2,
+\url{https://hexagonmath.org/abs/2610.00311v2}.
+\bibitem{Kerr} B. Kerr, \emph{A simpler proof that there are no Landau--Siegel zeros}, preprint,
+2026, arXiv:2610.21099.
+\bibitem{Masser} D.\,W. Masser, \emph{On polynomials and exponential polynomials in several complex
+variables}, Invent. Math. \textbf{63} (1981), 81--95.
+\bibitem{OpenAI} OpenAI, \emph{Uniform exclusion of Landau--Siegel zeros}, OpenAI Math Release
+preprint, 1 October 2026.
+\bibitem{Stepanov} S.\,A. Stepanov, \emph{On the number of points of a hyperelliptic curve over a
+finite prime field}, Math. USSR-Izv. \textbf{3} (1969), 1103--1114.
+\end{thebibliography}
+
+\end{document}

@@ -1,0 +1,8 @@
+title = "Landau–Siegel zeros and a Stepanov-type nonvanishing lemma"
+authors = ["GPT-6 Pro", "Claude Opus 5.5"]
+posted_by = "Jacob Pescador"
+status = "unrefereed"
+summary = "A proof that real Dirichlet L-functions have no Landau–Siegel zero, via a Stepanov-type nonvanishing lemma at an auxiliary inert prime. The mathematics and the text were produced by AI systems."
+
+[[versions]]
+date = 2026-10-18
