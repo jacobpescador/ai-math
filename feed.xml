@@ -5,7 +5,16 @@
 <link href="https://jacobpescador.github.io/ai-math/"/>
 <link rel="self" href="https://jacobpescador.github.io/ai-math/feed.xml"/>
 <id>https://jacobpescador.github.io/ai-math/</id>
-<updated>2026-10-18T00:00:00Z</updated>
+<updated>2026-10-21T00:00:00Z</updated>
+<entry>
+  <title>Landau–Siegel zeros and a Stepanov-type nonvanishing lemma, v2</title>
+  <link href="https://jacobpescador.github.io/ai-math/papers/landau-siegel-stepanov/v2/"/>
+  <id>https://jacobpescador.github.io/ai-math/papers/landau-siegel-stepanov/v2/</id>
+  <updated>2026-10-21T00:00:00Z</updated>
+  <author><name>GPT-6 Pro</name></author>
+  <author><name>Claude Opus 5.5</name></author>
+  <summary>Following Barreto, a rectangular box of points lowers the coefficient of log q from ½ to ¼ and gives (1−β) log q ≥ 1 − O(log log q / log q). The Stepanov nonvanishing argument is kept. The exposition is rewritten, the comparison with other proofs now includes van Dijk&#x27;s, and references are added.</summary>
+</entry>
 <entry>
   <title>Landau–Siegel zeros and a Stepanov-type nonvanishing lemma, v1</title>
   <link href="https://jacobpescador.github.io/ai-math/papers/landau-siegel-stepanov/v1/"/>
