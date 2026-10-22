@@ -14,3 +14,7 @@ note = "Following Barreto, a rectangular box of points lowers the coefficient of
 [[versions]]
 date = 2026-10-21
 note = "Corrects attributions and dates. The growing weight is credited to version 1, Green's version 2 is dated 18 October, van Dijk's two versions are described separately, and each cited preprint names its version. The mathematics is unchanged."
+
+[[versions]]
+date = 2026-10-21
+note = "Shortens the abstract, the comparison with other proofs and the authorship statement, and makes one statement in §1 exact. The mathematics is unchanged."
