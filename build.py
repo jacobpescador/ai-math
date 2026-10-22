@@ -142,6 +142,8 @@ def load_sets():
 
 def load_paper(directory, sets):
     slug = directory.name
+    if not re.fullmatch(r"[a-z0-9]+(-[a-z0-9]+)*", slug):
+        fail(f"{slug}: a paper's folder name must be lowercase letters, digits and hyphens")
     paper = tomllib.loads((directory / "paper.toml").read_text())
     paper["slug"] = slug
     paper["url"] = f"{SITE}/papers/{slug}/"
@@ -220,18 +222,22 @@ def index_page(papers):
     entries = []
     for p in papers:
         v = p["latest"]
-        links = [f'<a href="papers/{p["slug"]}/{p["pdf"]}">PDF</a>']
+        links = [f'<a href="papers/{p["slug"]}/{p["pdf"]}">PDF</a>', f'<a href="papers/{p["slug"]}/{v["tex"]}">TeX source</a>']
         if p["afterwords"]:
             links.append(f'<a href="papers/{p["slug"]}/afterword/">Afterword</a>')
         entries.append(f"""<h2><a href="papers/{p["slug"]}/">{e(p["title"])}</a></h2>
-<p class="meta">{e(byline(p))} · v{v["n"]}, {long_date(v["date"])} · {" · ".join(links)}</p>""")
+<p class="meta">{e(byline(p))} · v{v["n"]}, {long_date(v["date"])} · {e(p["status"])} · {" · ".join(links)}</p>""")
     body = f"""<h1>{NAME}</h1>
 <p>{TAGLINE}</p>
 
 {chr(10).join(entries)}
 
 <footer>{DEDICATION} · <a href="{REPO}">source and full history</a></footer>"""
-    return page(NAME, "", f"{SITE}/", TAGLINE, body)
+    head = "".join(f'<meta property="{k}" content="{e(c)}">\n' for k, c in [
+        ("og:type", "website"), ("og:site_name", NAME), ("og:title", NAME), ("og:description", TAGLINE),
+        ("og:url", f"{SITE}/"),
+    ])
+    return page(NAME, "", f"{SITE}/", TAGLINE, body, head)
 
 
 def cite(p, v, url):
@@ -272,14 +278,17 @@ def paper_page(p, v, root):
     version (root "../"). Only the version's own facts differ: its date and files, its abstract, its citation, and
     which version is bold in the list."""
     first, url = p["versions"][0], p["url"] + (root and v["page"])
+    # Scholar's tags go on the paper's own page only, so the versions are not indexed as separate works.
     head = "" if root else "".join(f'<meta name="{k}" content="{e(c)}">\n' for k, c in [
         ("citation_title", p["title"]),
         *[("citation_author", a) for a in p["authors"]],
         ("citation_publication_date", f"{first['date']:%Y/%m/%d}"),
         ("citation_abstract_html_url", p["url"]),
         ("citation_pdf_url", p["url"] + p["pdf"]),
-    ]) + "".join(f'<meta property="{k}" content="{e(c)}">\n' for k, c in [
-        ("og:type", "article"), ("og:title", p["title"]), ("og:description", p["summary"]), ("og:url", p["url"]),
+    ])
+    head += "".join(f'<meta property="{k}" content="{e(c)}">\n' for k, c in [
+        ("og:type", "article"), ("og:site_name", NAME), ("og:title", p["title"]), ("og:description", p["summary"]),
+        ("og:url", url),
     ])
     pdf = root + v["pdf"] if root else p["pdf"]
     links = [f'<a href="{pdf}">PDF</a>', f'<a href="{root}{v["tex"]}">TeX source</a>']
@@ -304,6 +313,8 @@ def paper_page(p, v, root):
 
 
 def afterword_page(p, edition, root, canonical):
+    """Afterword edition `edition` of p: at afterword/ for the latest, and at afterword/<n>/ for every edition, as the
+    paper has its own page and a page for each version."""
     method = edition["method"]
     last = p["afterwords"][-1]
     explains = p["versions"][edition["explains"] - 1]
@@ -335,7 +346,8 @@ def afterword_page(p, edition, root, canonical):
     title = f"Afterword · {p['title']}"
     description = edition.get("summary") or f"Afterword to “{p['title']}”."
     head = "".join(f'<meta property="{k}" content="{e(c)}">\n' for k, c in [
-        ("og:type", "article"), ("og:title", title), ("og:description", description), ("og:url", canonical),
+        ("og:type", "article"), ("og:site_name", NAME), ("og:title", title), ("og:description", description),
+        ("og:url", canonical),
     ])
     return page(title, root, canonical, description, body, head)
 
@@ -345,11 +357,12 @@ def feed(papers):
     for p in papers:
         for v in p["versions"]:
             url = p["url"] + v["page"]
-            items.append((v["date"], v["n"], f'{p["title"]}, v{v["n"]}', url, url, v.get("note", ""), p["authors"]))
+            items.append((v["date"], (v["n"], 0, 0), f'{p["title"]}, v{v["n"]}', url, url, v.get("note") or p["summary"], p["authors"]))
         for a in p["afterwords"]:
             url = f'{p["url"]}afterword/{a["n"]}/'
-            items.append((a["date"], a["n"], f'Afterword to {p["title"]}, edition {a["n"]}', url, url, a.get("note", ""), p["authors"]))
-    items.sort(key=lambda i: (i[0], i[1]), reverse=True)
+            items.append((a["date"], (a["explains"], 1, a["n"]), f'Afterword to {p["title"]}, edition {a["n"]}', url, url,
+                          a.get("note") or a.get("summary", ""), p["authors"]))
+    items.sort(key=lambda i: (i[0], i[1]), reverse=True)  # newest first; an edition just after the version it explains
     entries = "\n".join(f"""<entry>
   <title>{e(title)}</title>
   <link href="{link}"/>
@@ -381,20 +394,21 @@ def main():
             out[base + v["page"] + "index.html"] = paper_page(p, v, "../")
         if p["afterwords"]:
             latest = p["afterwords"][-1]
-            out[base + "afterword/index.html"] = afterword_page(p, latest, "../../../", f'{p["url"]}afterword/{latest["n"]}/')
+            out[base + "afterword/index.html"] = afterword_page(p, latest, "../../../", f'{p["url"]}afterword/')
             for a in p["afterwords"]:
                 canonical = f'{p["url"]}afterword/{a["n"]}/'
                 out[base + f'afterword/{a["n"]}/index.html'] = afterword_page(p, a, "../../../../", canonical)
-    for p in papers:
-        latest, copy = ROOT / "papers" / p["slug"] / p["latest"]["pdf"], ROOT / "papers" / p["slug"] / p["pdf"]
-        if not copy.is_file() or copy.read_bytes() != latest.read_bytes():
-            copy.write_bytes(latest.read_bytes())
-            print("wrote", copy.relative_to(ROOT))
     declared = {*out, *(f'papers/{p["slug"]}/{f}' for p in papers for f in published_sources(p))}
     for f in sorted((ROOT / "papers").rglob("*")):
         name = str(f.relative_to(ROOT))
         if f.is_file() and f.name != ".DS_Store" and name not in declared:
             fail(f"{name} is not part of any paper. Move it to drafts/ or declare it in paper.toml")
+    # Every check has passed; only now is anything written.
+    for p in papers:
+        latest, copy = ROOT / "papers" / p["slug"] / p["latest"]["pdf"], ROOT / "papers" / p["slug"] / p["pdf"]
+        if not copy.is_file() or copy.read_bytes() != latest.read_bytes():
+            copy.write_bytes(latest.read_bytes())
+            print("wrote", copy.relative_to(ROOT))
     for name, text in out.items():
         path = ROOT / name
         path.parent.mkdir(parents=True, exist_ok=True)
