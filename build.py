@@ -168,6 +168,40 @@ def version_statements(tex, pdf):
     return found
 
 
+def plain(text):
+    """Text as a citation compares it: TeX or HTML markup, quotation marks and spacing aside."""
+    text = re.sub(r"\\(?:url|emph|textit)\{([^}]*)\}", r"\1", text)
+    text = re.sub(r"\\href\{[^}]*\}\{([^}]*)\}", r"\1", text)
+    text = re.sub(r"<[^>]+>", "", html.unescape(text)).replace("--", "\u2013").replace("~", " ").replace("\\,", " ")
+    text = re.sub(r"[{}“”\"*]", "", text.replace("\u00a0", " "))
+    return re.sub(r"\s+", " ", text).strip().rstrip(".")
+
+
+def citation(p, v, url):
+    """A version's citation as plain text, the one form every self-citation must take."""
+    poster = f' (posted by {initials(p["posted_by"])})' if p.get("posted_by") else ""
+    return plain(f'{and_list(p["authors"])}{poster}, {p["title"]}, preprint, version {v["n"]}, {long_date(v["date"])}, {url}')
+
+
+def check_self_citations(p, directory):
+    """The latest version cites its earlier versions, and the latest Afterword cites the paper, as the site does."""
+    latest = p["versions"][-1]
+    tex = (directory / latest["tex"]).read_text()
+    for m in re.finditer(r"\\bibitem\{v(\d+)\}(.*?)(?=\\bibitem|\\end\{thebibliography\})", tex, re.S):
+        k = int(m.group(1))
+        if not 1 <= k <= len(p["versions"]):
+            fail(f'{p["slug"]}: {latest["tex"]} cites a version {k} that does not exist')
+        want = citation(p, p["versions"][k - 1], f'{SITE}/papers/{p["slug"]}/v{k}/')
+        if plain(m.group(2)) != want:
+            fail(f'{p["slug"]}: {latest["tex"]} cites version {k} as\n  {plain(m.group(2))}\nbut the site cites it as\n  {want}')
+    if p.get("afterwords"):
+        body = plain(p["afterwords"][-1]["body"])
+        poster = f' (posted by {initials(p["posted_by"])})' if p.get("posted_by") else ""
+        want = plain(f'{and_list(p["authors"])}{poster}, {p["title"]}, preprint')
+        if plain(p["title"]) in body and want not in body:
+            fail(f'{p["slug"]}: the latest Afterword cites the paper otherwise than as\n  {want}')
+
+
 def load_paper(directory, sets):
     slug = directory.name
     if not re.fullmatch(r"[a-z0-9]+(-[a-z0-9]+)*", slug):
@@ -214,6 +248,7 @@ def load_paper(directory, sets):
         if any(not link.startswith(("https://", "http://", "#")) for link in Links(edition["body"]).found):
             fail(f"{slug}: Afterword {n} has a relative link. It is served at two addresses, so links must be absolute")
     paper["afterwords"] = paper.pop("afterword", [])
+    check_self_citations(paper, directory)
     return paper
 
 
