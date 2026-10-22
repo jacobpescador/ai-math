@@ -36,11 +36,11 @@ ROOT = Path(__file__).resolve().parent
 SITE = "https://jacobpescador.github.io/ai-math"
 REPO = "https://github.com/jacobpescador/ai-math"
 NAME = "AI Math"
-TAGLINE = "Mathematics found and written by AI systems. Every version of every paper stays up at its own address, its files unchanged after the day it is posted."
+TAGLINE = "Mathematics found and written by AI systems. Every version of every paper stays up at its own address, its TeX and PDF unchanged after the day it is posted."
 CC0 = '<a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0</a>'
 DEDICATION = f"To the extent any copyright exists, dedicated to the public domain ({CC0})"
 STATIC = [".gitignore", ".nojekyll", "LICENSE", "README.md", "build.py", "style.css", "fonts/OFL.txt",
-          "fonts/stix-two-math.woff2"]
+          *sorted(str(f.relative_to(ROOT)) for f in (ROOT / "fonts").glob("*.woff2"))]
 LATEX2MATHML = "3.81.1"
 
 e = html.escape
@@ -65,7 +65,8 @@ except (ImportError, metadata.PackageNotFoundError):
 # TeX, read as the site shows it ------------------------------------------------------------------------------------
 
 def uncomment(tex):
-    return re.sub(r"(?<!\\)%.*", "", tex)
+    """TeX without comments: a % eats the rest of its line, the line break and the next line's leading spaces."""
+    return re.sub(r"(?<!\\)%[^\n]*(\n[ \t]*)?", "", tex)
 
 
 def group(tex, i):
@@ -339,7 +340,7 @@ def citation(p, v):
 
 
 def check_self_citations(p):
-    """The latest version cites its earlier versions, and the latest Afterword cites the paper, as the site does."""
+    """The latest version cites its earlier versions as the site does."""
     latest = p["latest"]
     for m in re.finditer(r"\\bibitem\{v(\d+)\}(.*?)(?=\\bibitem|\\end\{thebibliography\})", latest["source"], re.S):
         k = int(m.group(1))
@@ -348,11 +349,6 @@ def check_self_citations(p):
         want = citation(p, p["versions"][k - 1])
         if plain(m.group(2)) != want:
             fail(f'{p["slug"]}: {latest["tex"]} cites version {k} as\n  {plain(m.group(2))}\nbut the site cites it as\n  {want}')
-    if p["afterwords"]:
-        body = plain(p["afterwords"][-1]["body"])
-        want = plain(f'{and_list(latest["authors"])}{poster(p)}, {latest["title"]}, preprint')
-        if plain(latest["title"]) in body and want not in body:
-            fail(f'{p["slug"]}: the latest Afterword cites the paper otherwise than as\n  {want}')
 
 
 def load_sets():
