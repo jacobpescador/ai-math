@@ -25,7 +25,7 @@ ROOT = Path(__file__).resolve().parent
 SITE = "https://jacobpescador.github.io/ai-math"
 REPO = "https://github.com/jacobpescador/ai-math"
 NAME = "AI Math"
-TAGLINE = "Mathematics found and written by AI systems. Every version of every paper stays up at its own address, unchanged after the day it is posted."
+TAGLINE = "Mathematics found and written by AI systems. Every version of every paper stays up at its own address, its files unchanged after the day it is posted."
 CC0 = '<a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0</a>'
 DEDICATION = f"To the extent any copyright exists, dedicated to the public domain ({CC0})"
 
