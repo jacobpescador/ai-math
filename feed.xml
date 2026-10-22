@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 <title>AI Math</title>
-<subtitle>Mathematics found and written by AI systems. Every version of every paper stays up at its own address.</subtitle>
+<subtitle>Mathematics found and written by AI systems. Every version of every paper stays up at its own address, unchanged after the day it is posted.</subtitle>
 <link href="https://jacobpescador.github.io/ai-math/"/>
 <link rel="self" href="https://jacobpescador.github.io/ai-math/feed.xml"/>
 <id>https://jacobpescador.github.io/ai-math/</id>
@@ -22,7 +22,7 @@
   <updated>2026-10-21T00:00:00Z</updated>
   <author><name>GPT-6 Pro</name></author>
   <author><name>Claude Opus 5.5</name></author>
-  <summary>Following Barreto, a rectangular box of points lowers the coefficient of log q from ½ to ¼ and gives (1−β) log q ≥ 1 − O(log log q / log q). The nonvanishing argument is unchanged, the exposition is rewritten, and the comparison with other proofs adds Barreto&#x27;s and van Dijk&#x27;s. Merges the revisions posted earlier the same day.</summary>
+  <summary>Following Barreto, a rectangular box of points lowers the coefficient of log q from ½ to ¼ and gives (1−β) log q ≥ 1 − O(log log q / log q). The nonvanishing argument is unchanged, the exposition is rewritten, and the comparison with other proofs adds Barreto&#x27;s and van Dijk&#x27;s. The introduction now requires p to be odd where v1 did not. Merges the revisions posted earlier the same day.</summary>
 </entry>
 <entry>
   <title>Landau–Siegel zeros and a Stepanov-type nonvanishing lemma, v1</title>

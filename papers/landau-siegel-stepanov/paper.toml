@@ -9,7 +9,7 @@ date = 2026-10-18
 
 [[versions]]
 date = 2026-10-21
-note = "Following Barreto, a rectangular box of points lowers the coefficient of log q from ½ to ¼ and gives (1−β) log q ≥ 1 − O(log log q / log q). The nonvanishing argument is unchanged, the exposition is rewritten, and the comparison with other proofs adds Barreto's and van Dijk's. Merges the revisions posted earlier the same day."
+note = "Following Barreto, a rectangular box of points lowers the coefficient of log q from ½ to ¼ and gives (1−β) log q ≥ 1 − O(log log q / log q). The nonvanishing argument is unchanged, the exposition is rewritten, and the comparison with other proofs adds Barreto's and van Dijk's. The introduction now requires p to be odd where v1 did not. Merges the revisions posted earlier the same day."
 
 [[afterword]]
 date = 2026-10-21
