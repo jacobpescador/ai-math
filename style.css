@@ -55,6 +55,11 @@ math { font-family: "Site Math", math; }
 .display { margin: 1.1rem 0; padding: .15em 0; overflow-x: auto; overflow-y: hidden; }
 math[display="block"] { display: block; display: block math; margin: 1.1rem 0; padding: .15em 0; overflow-x: auto; overflow-y: hidden; }
 .display > math[display="block"] { margin: 0; padding: 0; overflow: visible; }
+/* A long display also comes broken after its relation (.narrow), shown in place of the one line (.wide) on a phone. */
+.display > math.narrow { display: none; }
+math.narrow > mtable > mtr > mtd { math-style: normal; text-align: left; padding: .15em 0; }
+math.narrow > mtable > mtr + mtr > mtd { padding-left: 3em; }
+@media (max-width: 520px) { .display > math.wide { display: none; } .display > math.narrow { display: block; display: block math; } }
 /* Punctuation after a superscript tucks under it, as in print: "below 41²." rather than "41² ." */
 .nobr > math:is(:has(> msup:last-child), :has(> mrow:last-child > msup:last-child)) { margin-inline-end: -.08em; }
 /* Chromium sizes a radical by its widest glyph variant but draws the smallest, leaving a gap after √q.

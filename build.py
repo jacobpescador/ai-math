@@ -145,7 +145,8 @@ def math(tex, display, defs={}):
     except Exception as error:
         raise Refused(f"cannot convert ${tex}$ ({type(error).__name__}: {error})")
     if "\\" in m:
-        raise Refused(f"${tex}$ uses {re.search(r'[\\][a-zA-Z]+|[\\].', m).group()}, which latex2mathml does not know")
+        unknown = re.search(r"[\\][a-zA-Z]+|[\\].", m).group()
+        raise Refused(f"${tex}$ uses {unknown}, which latex2mathml does not know")
     m = m.replace(' xmlns="http://www.w3.org/1998/Math/MathML"', "").replace(' display="inline"', "")
     m = re.sub(r"&#x0*([0-9A-Fa-f]+);", lambda g: g.group(0) if g.group(1).upper() in ("3C", "26", "3E") else chr(int(g.group(1), 16)), m)
     m = m.replace(" />", "/>")
@@ -155,7 +156,49 @@ def math(tex, display, defs={}):
     m = re.sub(rf"(</mi>|</mn>|</mfrac>|</msub>|</msup>|</msqrt>|\)</mo>|</mstyle>)<mi>({SPACED})</mi>", r'\1<mspace width="0.1667em"/><mi>\2</mi>', m)
     # a sign with no operand before it is unary, as TeX sets it: "= −1", not "= − 1"
     m = re.sub(r"(<mo[^>]*>[^<)\]|}!′⋯…]*</mo>|<mrow>|<mtd>|<math[^>]*>)<mo>([−+])</mo>", r'\1<mo form="prefix">\2</mo>', m)
-    return f'<div class="display">{m}</div>' if display else m
+    if not display:
+        return m
+    narrow = broken(m)
+    if not narrow:
+        return f'<div class="display">{m}</div>'
+    wide = m.replace("<math ", '<math class="wide" ', 1)
+    return f'<div class="display">{wide}{narrow}</div>'
+
+
+RELATION = r"<mo>(?:=|≤|≥|&lt;|&gt;|≠|≪|≫|≍|∼|≈|≡)</mo>"
+
+
+def children(row):
+    """The top-level elements of a MathML row, each as its markup."""
+    out, depth, start = [], 0, 0
+    for t in re.finditer(r"<(/?)\w+[^>]*?(/?)>", row):
+        if t.group(2):
+            if depth == 0:
+                out.append(row[t.start():t.end()])
+        elif t.group(1):
+            depth -= 1
+            if depth == 0:
+                out.append(row[start:t.end()])
+        else:
+            if depth == 0:
+                start = t.start()
+            depth += 1
+    return out
+
+
+def broken(m):
+    """The display over two rows for a phone, as print breaks a long one: after its relation, before the + or − that
+    leaves half the terms that follow it on each row. None when there is no such place."""
+    body = re.fullmatch(r'<math display="block"><mrow>(.*)</mrow></math>', m, re.S)
+    kids = children(body.group(1)) if body else []
+    rel = next((i for i, k in enumerate(kids) if re.fullmatch(RELATION, k)), None)
+    signs = [i for i, k in enumerate(kids) if rel is not None and i > rel + 1 and k in ("<mo>+</mo>", "<mo>−</mo>")]
+    if not signs:
+        return None
+    j = signs[len(signs) // 2]
+    sign = kids[j].replace("<mo>", '<mo form="infix">')
+    return (f'<math display="block" class="narrow"><mtable><mtr><mtd>{"".join(kids[:j])}</mtd></mtr>'
+            f'<mtr><mtd>{sign}{"".join(kids[j + 1:])}</mtd></mtr></mtable></math>')
 
 
 ACCENTS = {"'": "\u0301", "`": "\u0300", "^": "\u0302", '"': "\u0308", "~": "\u0303", "=": "\u0304", ".": "\u0307",
