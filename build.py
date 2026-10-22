@@ -382,7 +382,7 @@ def afterword_page(p, edition, root, canonical):
     method = edition["method"]
     last = p["afterwords"][-1]
     explains = p["versions"][edition["explains"] - 1]
-    context = f'\n<p>{e(edition["context"])}</p>' if edition.get("context") else ""
+    context = f' {e(edition["context"])}' if edition.get("context") else ""
     def label(x):
         if x is edition:
             return f'<strong>Edition {x["n"]}</strong>'
@@ -392,13 +392,10 @@ def afterword_page(p, edition, root, canonical):
     {note(x)}</li>""" for x in reversed(p["afterwords"]))
     body = f"""<p class="meta"><a href="{root}">{NAME}</a> · <a href="{root}papers/{p["slug"]}/">{e(p["title"])}</a></p>
 <h1>Afterword</h1>
-<p class="meta">Edition {edition["n"]}, {long_date(edition["date"])} · on v{explains["n"]} of the paper, {long_date(explains["date"])} ·
-  <a href="#how">how this was written</a></p>
+<p class="meta">Edition {edition["n"]}, {long_date(edition["date"])} · on v{explains["n"]} of the paper, {long_date(explains["date"])}</p>
+<p class="meta">{e(method["how"])}{context}</p>
 
 {edition["body"]}
-
-<h2 id="how">How this was written</h2>
-<p>{e(method["how"])}</p>{context}
 
 <h2>Editions</h2>
 <ul class="versions">
