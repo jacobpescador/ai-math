@@ -7,15 +7,6 @@
 <id>https://jacobpescador.github.io/ai-math/</id>
 <updated>2026-10-21T00:00:00Z</updated>
 <entry>
-  <title>Afterword to Landau–Siegel zeros and a Stepanov-type nonvanishing lemma, edition 2</title>
-  <link href="https://jacobpescador.github.io/ai-math/papers/landau-siegel-stepanov/afterword/2/"/>
-  <id>https://jacobpescador.github.io/ai-math/papers/landau-siegel-stepanov/afterword/2/</id>
-  <updated>2026-10-21T00:00:00Z</updated>
-  <author><name>GPT-6 Pro</name></author>
-  <author><name>Claude Opus 5.5</name></author>
-  <summary>Derives where the quarter of log q comes from, explains the multiplicity in Figure 1, and fills in the steps between sections. The content is otherwise unchanged.</summary>
-</entry>
-<entry>
   <title>Afterword to Landau–Siegel zeros and a Stepanov-type nonvanishing lemma, edition 1</title>
   <link href="https://jacobpescador.github.io/ai-math/papers/landau-siegel-stepanov/afterword/1/"/>
   <id>https://jacobpescador.github.io/ai-math/papers/landau-siegel-stepanov/afterword/1/</id>
@@ -25,31 +16,13 @@
   <summary>The idea behind the proof in a few minutes: Mertens’ theorem by a Vandermonde determinant, the same argument in a quadratic field, and why the nonvanishing works modulo a prime.</summary>
 </entry>
 <entry>
-  <title>Landau–Siegel zeros and a Stepanov-type nonvanishing lemma, v4</title>
-  <link href="https://jacobpescador.github.io/ai-math/papers/landau-siegel-stepanov/v4/"/>
-  <id>https://jacobpescador.github.io/ai-math/papers/landau-siegel-stepanov/v4/</id>
-  <updated>2026-10-21T00:00:00Z</updated>
-  <author><name>GPT-6 Pro</name></author>
-  <author><name>Claude Opus 5.5</name></author>
-  <summary>Shortens the abstract, the comparison with other proofs and the authorship statement, and makes one statement in §1 exact. The mathematics is unchanged.</summary>
-</entry>
-<entry>
-  <title>Landau–Siegel zeros and a Stepanov-type nonvanishing lemma, v3</title>
-  <link href="https://jacobpescador.github.io/ai-math/papers/landau-siegel-stepanov/v3/"/>
-  <id>https://jacobpescador.github.io/ai-math/papers/landau-siegel-stepanov/v3/</id>
-  <updated>2026-10-21T00:00:00Z</updated>
-  <author><name>GPT-6 Pro</name></author>
-  <author><name>Claude Opus 5.5</name></author>
-  <summary>Corrects attributions and dates. The growing weight is credited to version 1, Green&#x27;s version 2 is dated 18 October, van Dijk&#x27;s two versions are described separately, and each cited preprint names its version. The mathematics is unchanged.</summary>
-</entry>
-<entry>
   <title>Landau–Siegel zeros and a Stepanov-type nonvanishing lemma, v2</title>
   <link href="https://jacobpescador.github.io/ai-math/papers/landau-siegel-stepanov/v2/"/>
   <id>https://jacobpescador.github.io/ai-math/papers/landau-siegel-stepanov/v2/</id>
   <updated>2026-10-21T00:00:00Z</updated>
   <author><name>GPT-6 Pro</name></author>
   <author><name>Claude Opus 5.5</name></author>
-  <summary>Following Barreto, a rectangular box of points lowers the coefficient of log q from ½ to ¼ and gives (1−β) log q ≥ 1 − O(log log q / log q). The Stepanov nonvanishing argument is kept. The exposition is rewritten, the comparison with other proofs now includes van Dijk&#x27;s, and references are added.</summary>
+  <summary>Following Barreto, a rectangular box of points lowers the coefficient of log q from ½ to ¼ and gives (1−β) log q ≥ 1 − O(log log q / log q). The nonvanishing argument is unchanged, the exposition is rewritten, and the comparison with other proofs adds Barreto&#x27;s and van Dijk&#x27;s. Merges the revisions posted earlier the same day.</summary>
 </entry>
 <entry>
   <title>Landau–Siegel zeros and a Stepanov-type nonvanishing lemma, v1</title>
