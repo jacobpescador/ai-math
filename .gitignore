@@ -13,6 +13,7 @@
 /fonts/*
 !/fonts/OFL.txt
 !/fonts/stix-two-math.woff2
+!/fonts/stix-two-text-*.woff2
 !/papers/
 /papers/*/*
 !/papers/*/paper.toml
