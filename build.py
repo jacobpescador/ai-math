@@ -153,7 +153,6 @@ def load_paper(directory, sets):
         version["tex"] = f"v{n}/{slug}.tex"
         version["abstract_file"] = f"v{n}/abstract.html"
         version["page"] = f"v{n}/"
-        version["commit"] = f"{REPO}/commits/main/papers/{slug}/v{n}"
         for file in (version["pdf"], version["tex"], version["abstract_file"]):
             if not (directory / file).is_file():
                 fail(f"{slug}: v{n} lacks {file}")
@@ -171,7 +170,6 @@ def load_paper(directory, sets):
     paper["pdf"] = f"{slug}.pdf"
     for n, edition in enumerate(paper.get("afterword", []), 1):
         edition["n"] = n
-        edition["commit"] = f"{REPO}/commits/main/papers/{slug}/afterword/{n}.html"
         edition["method"] = sets.get(edition["set"]) or fail(f"{slug}: Afterword {n} names no set in afterword.toml")
         if not 1 <= edition["explains"] <= len(paper["versions"]):
             fail(f"{slug}: Afterword {n} explains a version that does not exist")
@@ -268,8 +266,7 @@ def version_list(p, here, root):
         if x is here:
             return f'<strong>v{x["n"]}</strong>'
         return f'<a href="{root}{"" if x is p["latest"] else x["page"]}">v{x["n"]}</a>'
-    return "\n".join(f"""  <li>{label(x)} · {long_date(x["date"])} · <a href="{root}{x["pdf"]}">PDF</a> · <a href="{root}{x["tex"]}">TeX</a> ·
-    <a href="{x["commit"]}">history</a>
+    return "\n".join(f"""  <li>{label(x)} · {long_date(x["date"])} · <a href="{root}{x["pdf"]}">PDF</a> · <a href="{root}{x["tex"]}">TeX</a>
     {note(x)}</li>""" for x in reversed(p["versions"]))
 
 
@@ -324,8 +321,7 @@ def afterword_page(p, edition, root, canonical):
             return f'<strong>Edition {x["n"]}</strong>'
         page = "" if x is last else f'{x["n"]}/'
         return f'<a href="{root}papers/{p["slug"]}/afterword/{page}">Edition {x["n"]}</a>'
-    editions = "\n".join(f"""  <li>{label(x)} · {long_date(x["date"])} · on v{x["explains"]} ·
-    <a href="{x["commit"]}">history</a>
+    editions = "\n".join(f"""  <li>{label(x)} · {long_date(x["date"])} · on v{x["explains"]}
     {note(x)}</li>""" for x in reversed(p["afterwords"]))
     body = f"""<p class="meta"><a href="{root}">{NAME}</a> · <a href="{root}papers/{p["slug"]}/">{e(p["title"])}</a></p>
 <h1>Afterword</h1>
