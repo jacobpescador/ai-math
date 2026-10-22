@@ -1,0 +1,5 @@
+# How Afterwords are written, as numbered sets the site prints under "How this was written". A set is never edited
+# once an Afterword uses it: a changed method adds a new number, and each edition names the set it was written by.
+
+[sets.1]
+how = """Written by AI systems. It is commentary, not refereed."""

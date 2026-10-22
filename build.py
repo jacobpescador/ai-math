@@ -3,6 +3,8 @@
 
 Sources, per paper in papers/<slug>/:
   paper.toml          title, authors, who posted it, status, summary, the versions and the Afterword editions
+                      (each with its date, the version it explains, its method set and an optional one-sentence
+                      summary used as the page's description when it is shared)
   v<n>/<slug>.pdf     version n, with v<n>/<slug>.tex and v<n>/abstract.html (its abstract, the mathematics in
                       MathML and the words those of the TeX), never changed once posted. <slug>.pdf beside them is
                       written by this script as a copy of the latest version, so that address always serves the latest
@@ -174,6 +176,8 @@ def load_paper(directory, sets):
         source = directory / "afterword" / f"{n}.html"
         if not source.is_file():
             fail(f"{slug}: Afterword {n} lacks afterword/{n}.html")
+        if not isinstance(edition.get("summary", ""), str):
+            fail(f"{slug}: Afterword {n} has a summary that is not text")
         edition["body"] = source.read_text().strip()
         if any(not link.startswith(("https://", "http://", "#")) for link in Links(edition["body"]).found):
             fail(f"{slug}: Afterword {n} has a relative link. It is served at two addresses, so links must be absolute")
@@ -325,8 +329,12 @@ def afterword_page(p, edition, root, canonical):
 </ul>
 
 {footer(f'{REPO}/commits/main/papers/{p["slug"]}/afterword')}"""
-    description = f"Afterword to “{p['title']}”."
-    return page(f"Afterword · {p['title']}", root, canonical, description, body)
+    title = f"Afterword · {p['title']}"
+    description = edition.get("summary") or f"Afterword to “{p['title']}”."
+    head = "".join(f'<meta property="{k}" content="{e(c)}">\n' for k, c in [
+        ("og:type", "article"), ("og:title", title), ("og:description", description), ("og:url", canonical),
+    ])
+    return page(title, root, canonical, description, body, head)
 
 
 def feed(papers):

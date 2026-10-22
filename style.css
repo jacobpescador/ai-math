@@ -37,3 +37,11 @@ summary { cursor: pointer; color: var(--link); }
 pre { font: .78rem/1.5 ui-monospace, Menlo, Consolas, monospace; background: var(--code); border: 1px solid var(--rule); border-radius: 6px; padding: .75rem .9rem; white-space: pre-wrap; overflow-wrap: anywhere; }
 
 footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--rule); color: var(--muted); font-size: .85rem; }
+
+figure { margin: 1.75rem 0; }
+figure svg { display: block; margin: 0 auto .6rem; }
+figcaption { font-size: .9rem; line-height: 1.5; }
+figcaption .fig { font-weight: 600; }
+.sources { padding-left: 1.2rem; font-size: .9rem; overflow-wrap: anywhere; }
+.sources li + li { margin-top: .4rem; }
+.nobr { white-space: nowrap; }
