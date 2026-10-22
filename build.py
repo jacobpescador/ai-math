@@ -655,6 +655,9 @@ def main():
         name = str(f.relative_to(ROOT))
         if f.is_file() and f.name != ".DS_Store" and name not in release:
             fail(f"{name} is not part of any paper. Move it out of papers/ or declare it in paper.toml")
+    for url in re.findall(r'url\("?([^")]+)"?\)', (ROOT / "style.css").read_text()):
+        if not url.startswith(("http:", "https:", "data:")) and url not in release:
+            fail(f"style.css loads {url}, which is not published")
     texts = {**out, **{f'papers/{p["slug"]}/{v["tex"]}': v["source"] for p in papers for v in p["versions"]}}
     if broken := broken_links(texts, release):
         fail("links that point nowhere:\n  " + "\n  ".join(broken))
