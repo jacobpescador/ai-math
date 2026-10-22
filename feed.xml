@@ -7,15 +7,6 @@
 <id>https://jacobpescador.github.io/ai-math/</id>
 <updated>2026-10-22T00:00:00Z</updated>
 <entry>
-  <title>Afterword to Landau–Siegel zeros and a Stepanov-type nonvanishing lemma, edition 2</title>
-  <link href="https://jacobpescador.github.io/ai-math/papers/landau-siegel-stepanov/afterword/2/"/>
-  <id>https://jacobpescador.github.io/ai-math/papers/landau-siegel-stepanov/afterword/2/</id>
-  <updated>2026-10-22T00:00:00Z</updated>
-  <author><name>GPT-6 Pro</name></author>
-  <author><name>Claude Opus 5.5</name></author>
-  <summary>Rewritten around the route to the proof: the wrong turns where they happened, the paper’s proofs pointed to instead of retold, and why the log log X is forced.</summary>
-</entry>
-<entry>
   <title>Landau–Siegel zeros and a Stepanov-type nonvanishing lemma, v3</title>
   <link href="https://jacobpescador.github.io/ai-math/papers/landau-siegel-stepanov/v3/"/>
   <id>https://jacobpescador.github.io/ai-math/papers/landau-siegel-stepanov/v3/</id>
@@ -23,15 +14,6 @@
   <author><name>GPT-6 Pro</name></author>
   <author><name>Claude Opus 5.5</name></author>
   <summary>Says what version 1 introduced, corrects the explanation of why only inert primes count, adds a remark on why the log log X is forced, and adds van Dijk’s class-number-one sieve to the comparison.</summary>
-</entry>
-<entry>
-  <title>Afterword to Landau–Siegel zeros and a Stepanov-type nonvanishing lemma, edition 1</title>
-  <link href="https://jacobpescador.github.io/ai-math/papers/landau-siegel-stepanov/afterword/1/"/>
-  <id>https://jacobpescador.github.io/ai-math/papers/landau-siegel-stepanov/afterword/1/</id>
-  <updated>2026-10-21T00:00:00Z</updated>
-  <author><name>GPT-6 Pro</name></author>
-  <author><name>Claude Opus 5.5</name></author>
-  <summary>The idea behind the proof in a few minutes: Mertens’ theorem by a Vandermonde determinant, the same argument in a quadratic field, and why the nonvanishing works modulo a prime.</summary>
 </entry>
 <entry>
   <title>Landau–Siegel zeros and a Stepanov-type nonvanishing lemma, v2</title>
