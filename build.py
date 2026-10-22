@@ -6,9 +6,9 @@ Sources, per paper in papers/<slug>/:
                       (each with its date, the version it explains, its method set and an optional one-sentence
                       summary used as the page's description when it is shared)
   v<n>/<slug>.pdf     version n, with v<n>/<slug>.tex and v<n>/abstract.html (its abstract, the mathematics in
-                      MathML and the words those of the TeX), never changed once posted. <slug>.pdf beside them is
+                      MathML and the words those of the TeX), never changed after the day it is posted. <slug>.pdf beside them is
                       written by this script as a copy of the latest version, so that address always serves the latest
-  afterword/<n>.html  Afterword edition n, never changed once posted
+  afterword/<n>.html  Afterword edition n, never changed after the day it is posted
 Output: index.html, feed.xml, and for each paper papers/<slug>/index.html (the latest version),
 papers/<slug>/v<n>/index.html and papers/<slug>/afterword/[<n>/]index.html.
 """
@@ -269,7 +269,7 @@ def version_list(p, here, root):
             return f'<strong>v{x["n"]}</strong>'
         return f'<a href="{root}{"" if x is p["latest"] else x["page"]}">v{x["n"]}</a>'
     return "\n".join(f"""  <li>{label(x)} · {long_date(x["date"])} · <a href="{root}{x["pdf"]}">PDF</a> · <a href="{root}{x["tex"]}">TeX</a> ·
-    <a href="{x["commit"]}">commit</a>
+    <a href="{x["commit"]}">history</a>
     {note(x)}</li>""" for x in reversed(p["versions"]))
 
 
@@ -325,7 +325,7 @@ def afterword_page(p, edition, root, canonical):
         page = "" if x is last else f'{x["n"]}/'
         return f'<a href="{root}papers/{p["slug"]}/afterword/{page}">Edition {x["n"]}</a>'
     editions = "\n".join(f"""  <li>{label(x)} · {long_date(x["date"])} · on v{x["explains"]} ·
-    <a href="{x["commit"]}">commit</a>
+    <a href="{x["commit"]}">history</a>
     {note(x)}</li>""" for x in reversed(p["afterwords"]))
     body = f"""<p class="meta"><a href="{root}">{NAME}</a> · <a href="{root}papers/{p["slug"]}/">{e(p["title"])}</a></p>
 <h1>Afterword</h1>
