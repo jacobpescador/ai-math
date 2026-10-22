@@ -13,7 +13,7 @@ note = "Following Barreto, a rectangular box of points lowers the coefficient of
 
 [[versions]]
 date = 2026-10-22
-note = "Says what the paper introduced, notes in the text that Barreto's post is no longer available, corrects the explanation of why only inert primes count, adds a remark showing why the log log X is forced on this construction, shortens the abstract, and adds van Dijk's class-number-one sieve to the comparison."
+note = "Says what the paper introduced, notes in the text that Barreto's post is no longer available, corrects the explanation of why only inert primes count, adds a remark showing why the log log X is forced on this construction, shortens the abstract, and adds van Dijk's class-number-one sieve to the comparison. Merges the revisions posted earlier the same day."
 
 [[afterword]]
 date = 2026-10-21
@@ -25,5 +25,5 @@ summary = "The idea behind the proof in a few minutes: Mertens’ theorem by a V
 date = 2026-10-22
 explains = 3
 set = 1
-note = "Rewritten around the route to the proof: the wrong turns where they happened, the paper's proofs pointed to instead of retold, and why the log log X is forced."
+note = "Rewritten around the route to the proof: the wrong turns where they happened, the paper's proofs pointed to instead of retold, and why the log log X is forced. Merges the revisions posted earlier the same day."
 summary = "How the proof was found: Euler's forty primes, Mertens from a Vandermonde, the derivatives that keep split primes out of the count, Stepanov's derivative, and where the method stops."

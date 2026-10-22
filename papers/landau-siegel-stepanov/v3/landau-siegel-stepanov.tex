@@ -22,7 +22,7 @@
 \newcommand{\F}{\mathbb{F}}
 \newcommand{\cO}{\mathcal{O}}
 \newcommand{\cM}{\mathcal{M}}
-\newcommand{\cL}{\mathcal{L}}
+\newcommand{\cQ}{\mathcal{Q}}
 \newcommand{\sd}{\sqrt{d}}
 \newcommand{\C}{\mathbb{C}}
 \DeclarePairedDelimiter\abs{\lvert}{\rvert}
@@ -67,8 +67,8 @@ nonvanishing arguments.
 This paper proves nonvanishing with the congruence that gives the divisibility, by a Stepanov-type root count
 at an auxiliary inert prime (Lemma~\ref{lem:stepanov}). Version~1 of this paper~\cite{v1} introduced
 this root count and a weight growing with $X$, and with a square box of points proved the bound of
-Theorem~\ref{thm:main} below with $\frac12\log q$ in place of $\frac14\log q$. Van Dijk~\cite{vanDijk} also uses
-this root count. The present version takes Barreto's rectangular box, and so gives a complete proof of his bounds.
+Theorem~\ref{thm:main} below with $\frac12\log q$ in place of $\frac14\log q$. The present version takes
+Barreto's rectangular box, and with it proves his bounds.
 
 Let $\chi$ be a primitive real Dirichlet character of conductor $q\ge3$, and let $S_\pm(X)$ denote
 the sum of $(\log p)/p$ over the primes $p\le X$ with $\chi(p)=\pm1$. Implied constants are
@@ -89,8 +89,8 @@ Every zero $\beta\in(0,1)$ of $L(s,\chi)$ satisfies
 \]
 \end{corollary}
 
-Barreto's post is no longer available, and Theorem~\ref{thm:main} and Corollary~\ref{cor:siegel} state his
-results as he posted them.
+Barreto's post is no longer available, and Theorem~\ref{thm:main} and Corollary~\ref{cor:siegel} are his
+results, stated in our notation.
 
 
 A real zero close to $1$ would make $\chi(p)=-1$ for most primes in a long range, and so make
@@ -154,21 +154,25 @@ The right side is at most $\log p_0$, the bound given by Mertens' theorem, exact
 Taking $p_0$ to be the largest inert prime up to $X$, Mertens' theorem alone gives Theorem~\ref{thm:main} for larger $q$.
 
 In the proof, the $w$-degrees and the derivatives add $O(\log p_0/\ell)$ to this bound, and the primes
-$p\le\ell$, to which the rewriting does not apply, add $\log\ell$. We take $\ell\approx\log p_0$. Without derivatives, about $p_0^2/(2\ell)$ points would be needed,
+$p\le\ell$, which the proof sets aside, add $\log\ell$. We take $\ell\approx\log p_0$. Without derivatives, about $p_0^2/(2\ell)$ points would be needed,
 of height about $p_0q^{1/4}/\sqrt\ell$. Adding $\log\ell$, this size estimate would give only
 $S_-\lesssim\log p_0+\frac14\log q+\frac12\log\ell$, worse than Mertens' bound. The $\frac14$ gives the
 constant $1$ in Corollary~\ref{cor:siegel} (Remark~\ref{rem:const}).
 
 \emph{Why inert primes.} The comparison cannot count the split primes as well, for it would then bound
-$\sum_{\ell<p<p_0}(\log p)/p\approx\log p_0$ by $\frac12\log p_0+\frac14\log q$, which is smaller once $q$ is well below $p_0^2$. At an
-odd split prime, Frobenius is the identity on $\Z[\sd]/p\cong\F_p\times\F_p$, while conjugation swaps the two factors,
-so no polynomial $g$ gives $\alpha'\equiv g(\alpha)\pmod p$ for all $\alpha\in\Z[\sd]$. What holds there is
-$z^p\equiv z$ and $w^p\equiv w$. As $\partial_z(z^p-z)\equiv-1$, while $\partial_z(z^p-w)\equiv0$, each order of
-$z$-derivative can remove one factor $z^p-z$ from a row, and for $p>\ell$
-a row has no more such factors than there are orders of derivative, so counting them guarantees none. The relation $w^p\equiv w$
-survives differentiation but acts only through the $w$-degrees, which the weight keeps to about $1/\ell$ of the
-$z$-degrees, so it adds at most about $(\log p_0)/\ell$. The derivatives that save the $\frac12$ thus keep the split
-primes above $\ell$ out of the count, and the argument bounds $S_-$, the sum that a Landau--Siegel zero makes large.
+$\sum_{\ell<p<p_0}(\log p)/p\approx\log p_0$ by $\frac12\log p_0+\frac14\log q$, which is smaller once $q$ is well below
+$p_0^2$. Something in the construction must exclude them, and it is the derivatives. At an odd split prime,
+$\Z[\sd]/p\cong\F_p\times\F_p$ with conjugation swapping the two factors, so no polynomial $g$ gives
+$\alpha'\equiv g(\alpha)\pmod p$ for all $\alpha\in\Z[\sd]$. What holds there is $z^p\equiv z$ and $w^p\equiv w$. With
+values alone the first would serve a split prime as $z^p\equiv w$ serves an inert one: replacing $z^i$ by
+$z^v(z^p-z)^h$, with $i=ph+v$, makes the row divisible by $p^h$. Derivatives undo this. Modulo $p$ we have
+$\partial_z(z^p-w)\equiv0$, so a differentiated factor $z^p-w$ stays divisible by $p$, while $\partial_z(z^p-z)\equiv-1$
+is a unit, so each order of derivative can use up one factor $z^p-z$. For $p>\ell$ a row has $h=\lfloor i/p\rfloor$ of
+these factors, at most the largest order of derivative, about $p_0/\ell$, so counting them guarantees nothing at $p$.
+The relation $w^p\equiv w$ survives differentiation, but it can only spend $w$-degree, $p$ units for each factor of $p$,
+and the weight keeps the $w$-degrees to about $1/\ell$ of the $z$-degrees, so it adds at most about $(\log p_0)/\ell$.
+The derivatives that save the $\frac12$ thus keep the split primes above $\ell$ out of the count, and the argument
+bounds $S_-$, the sum that a Landau--Siegel zero makes large.
 
 
 \section{Two lemmas}\label{sec:lemmas}
@@ -313,7 +317,7 @@ which is the proposition, as $\frac12+\frac1{2\ell}+\frac3\ell=\frac12+\frac7{2\
 
 \begin{remark}\label{rem:loglog}
 For some fields, changing the monomials or $\ell$ cannot remove the $\log\log X$ from an argument that uses the
-bounds~\eqref{eq:upper} and~\eqref{eq:div}; we sketch why. Let $\cM$ be a finite set of exponents closed under the change of basis at a prime $p$: if
+bounds~\eqref{eq:upper} and~\eqref{eq:div}, as we now sketch. Let $\cM$ be a finite set of exponents closed under the change of basis at a prime $p$: if
 $(i,j)\in\cM$ and $i\ge p$, then $(i-p,j+1)\in\cM$. Then $I\le pJ+(p-1)m$. Indeed, in the class of pairs with
 $i\equiv r\pmod p$ and $\lfloor i/p\rfloor+j=k$, the pairs are $(r+p(k-j),j)$ and their $j$ form a run ending at $k$, so
 the mean of $j$ is at least $k/2$, and the mean of $i$ is at most $r$ plus $p$ times the mean of $j$. Suppose the change of
@@ -370,14 +374,14 @@ positive because $\operatorname{Re}\rho\le1<\sigma$. Keeping only $\rho=\beta$ a
 \frac1{u+1-\beta}\le\log q+2\log\frac1u+O(\log\log q)\qquad(0<u\le1).
 \end{equation}
 
-\emph{Conclusion.} Put $\cL=\log q$ and $u=\cL^{-2}$, so that $u\cL=1/\cL$ and
-$\log(1/u)=2\log\cL$. By~\eqref{eq:key},
+\emph{Conclusion.} Put $\cQ=\log q$ and $u=\cQ^{-2}$, so that $u\cQ=1/\cQ$ and
+$\log(1/u)=2\log\cQ$. By~\eqref{eq:key},
 \[
-(1-\beta)\cL\ge\frac{\cL}{\cL+O(\log\cL)}-\frac1\cL\ge1-O\Bigl(\frac{\log\cL}{\cL}\Bigr).
+(1-\beta)\cQ\ge\frac{\cQ}{\cQ+O(\log\cQ)}-\frac1\cQ\ge1-O\Bigl(\frac{\log\cQ}{\cQ}\Bigr).
 \]
-This bound is empty for small $q$. To get $(1-\beta)\log q\gg1$ for every $q$, take $u=\eta/\cL$
-instead, with $0<\eta\le1$. Since $\log(1/u)=\log(1/\eta)+\log\cL\le\log(1/\eta)+\cL$,~\eqref{eq:key} gives
-$1/(u+1-\beta)\ll(1+\log(1/\eta))\cL$. Hence $(1-\beta)\cL\ge c_0/(1+\log(1/\eta))-\eta$ with $c_0>0$ absolute, and
+This bound is empty for small $q$. To get $(1-\beta)\log q\gg1$ for every $q$, take $u=\eta/\cQ$
+instead, with $0<\eta\le1$. Since $\log(1/u)=\log(1/\eta)+\log\cQ\le\log(1/\eta)+\cQ$,~\eqref{eq:key} gives
+$1/(u+1-\beta)\ll(1+\log(1/\eta))\cQ$. Hence $(1-\beta)\cQ\ge c_0/(1+\log(1/\eta))-\eta$ with $c_0>0$ absolute, and
 this is positive once $\eta$ is small enough.
 \end{proof}
 
@@ -406,7 +410,8 @@ change of basis to $z^v(z^p-w)^h$ comes from~\cite{OpenAI}, in Kerr's form~\cite
 
 \emph{Points and weights.} A square box of points, as in Green's proof, gives $\frac12\log q$, and
 Barreto's~\cite{Barreto} rectangular box gives $\frac14\log q$. A fixed weight, as in OpenAI's and Kerr's
-proofs, gives the bound at $X$ a fixed power of $q$, and a weight growing with $X$ costs $\log\log X$ (Remark~\ref{rem:loglog}).
+proofs, gives the bound at $X$ a fixed power of $q$. The weight growing with $X$ of version~1 gives it uniformly in
+$X$, at the cost of $\log\log X$ (Remark~\ref{rem:loglog}).
 
 \emph{Nonvanishing.} OpenAI~\cite{OpenAI} uses an interpolation lemma with a greedy choice of monomial rows.
 Kerr~\cite{Kerr} constructs an auxiliary polynomial by the pigeonhole principle in place of a
