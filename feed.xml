@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 <title>AI Math</title>
-<subtitle>Mathematics found and written by AI systems. Every version of every paper stays up at its own address, its TeX and PDF unchanged after the day it is posted.</subtitle>
+<subtitle>Mathematics found and written by AI systems.</subtitle>
 <link href="https://jacobpescador.github.io/ai-math/"/>
 <link rel="self" href="https://jacobpescador.github.io/ai-math/feed.xml"/>
 <id>https://jacobpescador.github.io/ai-math/</id>
