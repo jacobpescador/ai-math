@@ -259,7 +259,7 @@ def cite(p, v, url):
 <summary>BibTeX</summary>
 <pre>{e(bibtex)}</pre>
 </details>
-<p class="meta">To report an error, <a href="{REPO}/issues">open an issue</a>. Corrections appear as new versions.</p>"""
+<p class="meta">To report an error, <a href="{REPO}/issues">open an issue</a>. Corrections appear as revised versions.</p>"""
 
 
 def version_list(p, here, root):
