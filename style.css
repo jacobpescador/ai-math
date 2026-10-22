@@ -51,12 +51,10 @@ h1 + .meta { margin-bottom: 2rem; }
 
 /* Math: STIX Two Math at the text's size, so x-heights and strokes match. */
 math { font-family: "Site Math", math; }
-math[display="block"] { margin: 1.1rem 0; padding: .15em 0; overflow-x: auto; overflow-y: hidden; }
-/* A display too wide for a phone is written twice: one line (.wide) and broken over rows (.narrow). */
-math.narrow { display: none; }
-math.narrow > mtable > mtr > mtd { math-style: normal; text-align: left; padding: .15em 0; }
-math.narrow > mtable > mtr + mtr > mtd { padding-left: 3em; }
-@media (max-width: 520px) { math.wide { display: none; } math.narrow { display: block; display: block math; } }
+/* A displayed formula wider than the page scrolls sideways in its own box, so one rendering serves phones and desktops. */
+.display { margin: 1.1rem 0; padding: .15em 0; overflow-x: auto; overflow-y: hidden; }
+math[display="block"] { display: block; display: block math; margin: 1.1rem 0; padding: .15em 0; overflow-x: auto; overflow-y: hidden; }
+.display > math[display="block"] { margin: 0; padding: 0; overflow: visible; }
 /* Punctuation after a superscript tucks under it, as in print: "below 41²." rather than "41² ." */
 .nobr > math:is(:has(> msup:last-child), :has(> mrow:last-child > msup:last-child)) { margin-inline-end: -.08em; }
 /* Chromium sizes a radical by its widest glyph variant but draws the smallest, leaving a gap after √q.
