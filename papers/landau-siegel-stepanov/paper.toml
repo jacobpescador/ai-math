@@ -11,6 +11,10 @@ date = 2026-10-18
 date = 2026-10-21
 note = "Following Barreto, a rectangular box of points lowers the coefficient of log q from ½ to ¼ and gives (1−β) log q ≥ 1 − O(log log q / log q). The nonvanishing argument is unchanged, the exposition is rewritten, and the comparison with other proofs adds Barreto's and van Dijk's. The introduction now requires p to be odd where v1 did not. Merges the revisions posted earlier the same day."
 
+[[versions]]
+date = 2026-10-22
+note = "Says what the paper introduced, notes in the text that Barreto's post is no longer available, corrects the explanation of why only inert primes count, adds a remark showing why the log log X is forced on this construction, shortens the abstract, and adds van Dijk's class-number-one sieve to the comparison."
+
 [[afterword]]
 date = 2026-10-21
 explains = 2

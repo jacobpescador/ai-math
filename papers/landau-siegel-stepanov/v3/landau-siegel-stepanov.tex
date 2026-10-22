@@ -1,0 +1,458 @@
+\documentclass[11pt]{amsart}
+\usepackage[margin=1in]{geometry}
+\usepackage{amssymb,mathtools}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{pdftitle={Landau--Siegel zeros and a Stepanov-type nonvanishing lemma},
+  pdfauthor={GPT-6 Pro (OpenAI) and Claude Opus 5.5 (Anthropic), posted and maintained by Jacob Pescador},
+  pdfsubject={Preprint, version 3, 22 October 2026. AI-produced, not refereed.}}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\emergencystretch=1em
+\raggedbottom
+\makeatletter\@secpenalty=0\makeatother
+\DeclareTextSymbolDefault{\textsection}{OMS}
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\cO}{\mathcal{O}}
+\newcommand{\cM}{\mathcal{M}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\sd}{\sqrt{d}}
+\newcommand{\C}{\mathbb{C}}
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+
+\title[Landau--Siegel zeros and a Stepanov-type lemma]{Landau--Siegel zeros and a\\ Stepanov-type nonvanishing lemma}
+\author[GPT-6 Pro and Claude Opus 5.5]{GPT-6 Pro (OpenAI) and Claude Opus 5.5 (Anthropic)}
+\dedicatory{Posted and maintained by Jacob Pescador}
+\thanks{Version~3, 22 October 2026. All versions and corrections:\newline\url{https://jacobpescador.github.io/ai-math/papers/landau-siegel-stepanov/}}
+
+\def\UrlBigBreaks{}\def\UrlBreaks{\do\/}\mathchardef\UrlBreakPenalty=100
+\begin{document}
+
+\begin{abstract}
+Let $\chi$ be a primitive real character of conductor $q\ge3$. We prove Barreto's bound
+\[
+\sum_{\substack{p\le X\\ \chi(p)=-1}}\frac{\log p}p\le\frac12\log X+\frac14\log q+\log\log X+O(1)
+\]
+uniformly in $X\ge3$ and $q$, with an effective implied constant, and hence that every zero
+$\beta\in(0,1)$ of $L(s,\chi)$ satisfies $(1-\beta)\log q\ge1-O(\log\log q/\log q)$, so there is no
+Landau--Siegel zero. As in OpenAI's proof, the norm of an interpolation determinant is bounded above by the
+size of its entries and below by its divisibility by high powers of the odd inert primes. Here the points are
+conjugate pairs $(\alpha,\alpha')$ of quadratic integers in Barreto's rectangular box, which gives the
+$\frac14$. A single congruence, that conjugation is the Frobenius modulo an odd inert prime, gives both the
+divisibility and the nonvanishing. Modulo a large inert prime $p_0$ every point lies on the graph
+$w=z^{p_0}$, and as $z^{p_0}$ has derivative zero modulo $p_0$, a linear relation among the rows of the interpolation matrix would
+give a polynomial in $z$ with more roots, counted with multiplicity, than its degree, as in Stepanov's method.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+A Landau--Siegel zero is a real zero $\beta$ of a quadratic Dirichlet $L$-function $L(s,\chi)$ with
+$(1-\beta)\log q$ small, $q$ being the conductor. Other Dirichlet $L$-functions have none~\cite[Ch.~14]{Davenport}.
+Excluding such zeros gives the effective bound
+$L(1,\chi)\gg1/\log q$ in place of Siegel's ineffective $L(1,\chi)\gg_\varepsilon q^{-\varepsilon}$, and so,
+when $\chi$ is odd, an effective bound $\gg\sqrt q/\log q$ for the class number of $\Q(\sqrt{-q})$. Such zeros
+were recently excluded by OpenAI~\cite{OpenAI}, as expounded by Banks~\cite{Banks}, and since then by Kerr~\cite{Kerr},
+Green~\cite{Green}, Barreto~\cite{Barreto} and van Dijk~\cite{vanDijk}. All of these proofs rest on
+divisibility by high powers of the inert primes, and they differ in their points, weights and
+nonvanishing arguments.
+This paper proves nonvanishing with the congruence that gives the divisibility, by a Stepanov-type root count
+at an auxiliary inert prime (Lemma~\ref{lem:stepanov}). Version~1 of this paper~\cite{v1} introduced
+this root count and a weight growing with $X$, and with a square box of points proved the bound of
+Theorem~\ref{thm:main} below with $\frac12\log q$ in place of $\frac14\log q$. Van Dijk~\cite{vanDijk} also uses
+this root count. The present version takes Barreto's rectangular box, and so gives a complete proof of his bounds.
+
+Let $\chi$ be a primitive real Dirichlet character of conductor $q\ge3$, and let $S_\pm(X)$ denote
+the sum of $(\log p)/p$ over the primes $p\le X$ with $\chi(p)=\pm1$. Implied constants are
+absolute and effective, but we do not compute them. We use Mertens' theorem $\sum_{p\le x}(\log p)/p=\log x+O(1)$ and Chebyshev's
+bound $\sum_{p\le x}\log p\ll x$.
+
+\begin{theorem}[Barreto~\cite{Barreto}]\label{thm:main}
+For $X\ge3$ we have
+\[
+S_-(X)\le\frac12\log X+\frac14\log q+\log\log X+O(1).
+\]
+\end{theorem}
+
+\begin{corollary}[Barreto~\cite{Barreto}]\label{cor:siegel}
+Every zero $\beta\in(0,1)$ of $L(s,\chi)$ satisfies
+\[
+(1-\beta)\log q\ge1-O\Bigl(\frac{\log\log q}{\log q}\Bigr)\qquad\textup{and}\qquad(1-\beta)\log q\gg1.
+\]
+\end{corollary}
+
+Barreto's post is no longer available, and Theorem~\ref{thm:main} and Corollary~\ref{cor:siegel} state his
+results as he posted them.
+
+
+A real zero close to $1$ would make $\chi(p)=-1$ for most primes in a long range, and so make
+$S_-(X)$ nearly $\log X$, contrary to Theorem~\ref{thm:main}. For fixed $q$, Mertens' theorem and
+$L(1,\chi)\ne0$ give $S_-(X)=\frac12\log X+O_q(1)$, so the $\frac12$ cannot be lowered,
+and the content of Theorem~\ref{thm:main} is its uniformity in $q$.
+
+\emph{The idea.} Write $\chi$ as the Kronecker symbol $(d/\cdot)$ with $d$ a fundamental discriminant, $\abs{d}=q$, and for
+$\alpha=x+y\sd$ put $\alpha'=x-y\sd$. If $p$ is odd and $\chi(p)=-1$, so that $p$ is inert
+in $\Q(\sd)$, then conjugation on $\Z[\sd]/p$ is the Frobenius, so at every point $(z,w)=(\alpha,\alpha')$
+\begin{equation}\label{eq:fact}
+w\equiv z^p\pmod p,\qquad\text{and}\qquad\partial_z^\kappa(z^p-w)\equiv0\pmod p\quad(\kappa\ge1).
+\end{equation}
+
+The plan is to build a determinant $\delta$ with entries of controlled size that is a nonzero
+algebraic integer divisible by high powers of many inert primes. A nonzero integer has absolute value at least the product of the
+prime powers dividing it, so the divisibility bounds the norm of $\delta$ from below, Hadamard's
+inequality bounds it from above, and comparing the two gives an upper bound for $S_-$.
+
+Fix an inert prime $p_0$ and a weight $\ell$. The matrix has a row for each monomial $z^iw^j$ with
+$i+\ell j\le p_0-1$. The weight keeps the $w$-degrees small, as they add to the size of the entries but not
+to the divisibility, which comes from the $z$-degrees. The matrix has a column for each point
+$(\alpha,\alpha')$ with $\alpha$ in a box $0\le x<N_1$, $0\le y<N_2$ whose sides are chosen below, and each order of $z$-derivative up to
+the largest $w$-degree, about $p_0/\ell$, as the root count below requires. Each entry is that derivative of
+the monomial at the point. Take $\delta$ to be a minor that uses every row, and $\delta'$
+its conjugate, so that $\delta\delta'$ is an integer. There are about $p_0^2/(2\ell)$ rows but only about $p_0$ points in the box, and the
+derivatives supply the missing columns without enlarging the box of points.
+
+\emph{Divisibility.} At an inert prime $p$ with $\ell<p<p_0$, the change of basis
+$z^iw^j\mapsto z^v(z^p-w)^hw^j$, where $i=ph+v$ with $0\le v<p$, trades $z$-degree for $w$-degree and leaves $\delta$
+unchanged. By~\eqref{eq:fact} the new row is divisible by $p^h$, so $\delta$ is divisible by
+about $p^{I/p}$, where $I=\sum i$.
+
+\emph{Nonvanishing.} At $p_0$ every $z$-degree is below $p_0$, so there is nothing to rewrite,
+and~\eqref{eq:fact} is used a second time. Modulo $p_0$ the points lie on the graph $w=z^{p_0}$ of
+Frobenius, and since $\partial_z(z^{p_0}-w)\equiv0$, differentiating in $z$ commutes with substituting
+$w=z^{p_0}$. If the box holds $p_0$ points distinct modulo $p_0$, a relation among the rows modulo $p_0$ therefore
+becomes a polynomial in $z$ with more roots,
+counted with multiplicity, than its degree (Lemma~\ref{lem:stepanov}), so $\delta$ can be chosen nonzero.
+The derivatives thus serve both steps: they keep the divisibility at the small inert primes, and at $p_0$ they
+supply the multiplicities. This argument uses characteristic $p_0$. Over $\C$, the
+substitution $w=g(z)$ commutes with $\partial_z$ only for constant $g$, and each line $w=c$ contains at
+most one of the points. Modulo $p_0$ the choice $g=z^{p_0}$ is also available, and its graph contains
+all of them.
+
+\emph{Size.} Call $\max(\abs{\alpha},\abs{\alpha'})$ the height of the point $(\alpha,\alpha')$. It
+controls the entries of $\delta$ and $\delta'$, and the root count requires $p_0$ points, so we choose the
+box to minimise their height. A box with sides $N_1,N_2$ has $N_1N_2$ points, each of height at most
+$N_1+N_2\sqrt q$. The best shape balances the two terms: $N_1\approx p_0^{1/2}q^{1/4}$ and
+$N_2\approx p_0^{1/2}q^{-1/4}$, with height $H\approx p_0^{1/2}q^{1/4}$. The points stay distinct modulo
+$p_0$ when $q\le p_0^2$. In that range,
+up to constants, no set of $p_0$ points of $\Z[\sd]$ does better, since
+$\#\{\alpha:\max(\abs{\alpha},\abs{\alpha'})\le H\}\ll(1+H)(1+H/\sqrt q)$.
+
+Heuristically, Hadamard's inequality gives $\log\abs{\delta\delta'}\lesssim2I\log H$, and the
+divisibility gives $\log\abs{\delta\delta'}\gtrsim2I\sum(\log p)/p$ over the inert $p\in(\ell,p_0)$, so
+\[
+\sum_{\substack{\ell<p<p_0\\ \chi(p)=-1}}\frac{\log p}p\lesssim\log H\approx\frac12\log p_0+\frac14\log q.
+\]
+The right side is at most $\log p_0$, the bound given by Mertens' theorem, exactly when $q\le p_0^2$.
+Taking $p_0$ to be the largest inert prime up to $X$, Mertens' theorem alone gives Theorem~\ref{thm:main} for larger $q$.
+
+In the proof, the $w$-degrees and the derivatives add $O(\log p_0/\ell)$ to this bound, and the primes
+$p\le\ell$, to which the rewriting does not apply, add $\log\ell$. We take $\ell\approx\log p_0$. Without derivatives, about $p_0^2/(2\ell)$ points would be needed,
+of height about $p_0q^{1/4}/\sqrt\ell$. Adding $\log\ell$, this size estimate would give only
+$S_-\lesssim\log p_0+\frac14\log q+\frac12\log\ell$, worse than Mertens' bound. The $\frac14$ gives the
+constant $1$ in Corollary~\ref{cor:siegel} (Remark~\ref{rem:const}).
+
+\emph{Why inert primes.} The comparison cannot count the split primes as well, for it would then bound
+$\sum_{\ell<p<p_0}(\log p)/p\approx\log p_0$ by $\frac12\log p_0+\frac14\log q$, which is smaller once $q$ is well below $p_0^2$. At an
+odd split prime, Frobenius is the identity on $\Z[\sd]/p\cong\F_p\times\F_p$, while conjugation swaps the two factors,
+so no polynomial $g$ gives $\alpha'\equiv g(\alpha)\pmod p$ for all $\alpha\in\Z[\sd]$. What holds there is
+$z^p\equiv z$ and $w^p\equiv w$. As $\partial_z(z^p-z)\equiv-1$, while $\partial_z(z^p-w)\equiv0$, each order of
+$z$-derivative can remove one factor $z^p-z$ from a row, and for $p>\ell$
+a row has no more such factors than there are orders of derivative, so counting them guarantees none. The relation $w^p\equiv w$
+survives differentiation but acts only through the $w$-degrees, which the weight keeps to about $1/\ell$ of the
+$z$-degrees, so it adds at most about $(\log p_0)/\ell$. The derivatives that save the $\frac12$ thus keep the split
+primes above $\ell$ out of the count, and the argument bounds $S_-$, the sum that a Landau--Siegel zero makes large.
+
+
+\section{Two lemmas}\label{sec:lemmas}
+
+Let $\cO=\Z[\sd]=\Z\oplus\Z\sd$.
+
+\begin{lemma}\label{lem:frob}
+Let $p$ be an odd prime with $\chi(p)=-1$. Then $\cO/p\cO$ is a field, and
+$\alpha^p\equiv\alpha'\pmod{p\cO}$ for every $\alpha\in\cO$.
+\end{lemma}
+
+\begin{proof}
+As $(d/p)=\chi(p)=-1$, $d$ is not a square modulo $p$, so $\cO/p\cO\cong\F_p[T]/(T^2-d)$ is a field. By the binomial theorem, Fermat's little
+theorem and Euler's criterion, $(x+y\sd)^p\equiv x+yd^{(p-1)/2}\sd\equiv x-y\sd\pmod{p\cO}$. (Oddness is needed: $\cO$ need not be
+maximal at $2$.)
+\end{proof}
+
+\begin{lemma}[after Stepanov~\cite{Stepanov}]\label{lem:stepanov}
+Let $k$ be a field of characteristic $p$, let $1\le t\le p$, and let $F\in k[z,w]$ have $\deg_zF<p$
+and $\deg_wF<t$. If $(\partial_z^\kappa F)(a,a^p)=0$ for $\kappa<t$ at $p$ distinct $a\in k$, then $F=0$.
+\end{lemma}
+
+\begin{proof}
+Suppose $F\ne0$ and put $G(z)=F(z,z^p)$. The monomial $z^iw^j$ becomes $z^{i+pj}$, and these
+exponents are distinct because $0\le i<p$, so $G\ne0$ and $\deg G\le(p-1)+p(t-1)=pt-1$. As the
+derivative of $z^p$ vanishes in characteristic $p$, the chain rule gives
+$G^{(\kappa)}(z)=(\partial_z^\kappa F)(z,z^p)$, so $G^{(\kappa)}(a)=0$ for $\kappa<t$ at each of the
+$p$ points. Writing $G=\sum_\kappa c_\kappa(z-a)^\kappa$ gives $G^{(\kappa)}(a)=\kappa!\,c_\kappa$, and
+$\kappa!\ne0$ in $k$ for $\kappa<t\le p$, so $(z-a)^t$ divides $G$ for each of the $p$ points. The $(z-a)^t$ are pairwise coprime, contradicting
+$\deg G<pt$.
+\end{proof}
+
+Lemma~\ref{lem:stepanov} is the multiplicity count of Stepanov's method. Stepanov
+constructs a nonzero auxiliary polynomial vanishing to high order at a set of points and uses the count to bound
+the size of the set. Here the points are given, and the count shows that $F=0$. The count is exact on the rectangle $i<p$, $j<t$: the exponents
+$i+pj$ fill $0,\dots,pt-1$ once each, so by Hermite interpolation the $pt$ values
+$(\partial_z^\kappa F)(a,a^p)$ can be arbitrary. In \S\ref{sec:main} the lemma is applied
+with $p=p_0$ to the triangle $i+\ell j\le D$ instead, which, unlike the rectangle, is preserved by the change
+of basis at each inert prime in $(\ell,D]$.
+
+\section{Proof of Theorem~\ref{thm:main}}\label{sec:main}
+
+\begin{proposition}\label{prop:ell}
+Let $p_0\ge5$ be a prime with $\chi(p_0)=-1$ and $q\le p_0^2$, put $D=p_0-1$, and let $\ell\ge2$ be
+an integer. Then
+\[
+S_-(D)\le\Bigl(\frac12+\frac{7}{2\ell}\Bigr)\log D+\frac{\ell+1}{4\ell}\log q+\log\ell+O(1).
+\]
+\end{proposition}
+
+\begin{proof}[Deduction of Theorem~\ref{thm:main}]
+Let $p_0$ be the largest prime $\le X$ with $\chi(p_0)=-1$. If there is no such prime, or $p_0\le3$,
+then $S_-(X)=O(1)$. Otherwise $S_-(X)=S_-(p_0)$ by maximality. If $q>p_0^2$, then Mertens' theorem gives
+$S_-(X)\le\log p_0+O(1)\le\frac12\log X+\frac14\log q+O(1)$. If $q\le p_0^2$, then $S_-(X)=S_-(D)+O(1)$, and we apply
+Proposition~\ref{prop:ell} with $\ell=\lceil\log p_0\rceil\ge2$. As $\log D\le\ell$ and
+$\log q\le2\ell$, the terms $7\log D/(2\ell)$ and $\log q/(4\ell)$ are $O(1)$, and
+$\log\ell\le\log\log X+1$.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{prop:ell}]
+
+\emph{Monomials.} Let $s=\lfloor D/\ell\rfloor$, and let $\cM$ be the set of $(i,j)\in\Z_{\ge0}^2$
+with $i+\ell j\le D$, so that $i\le D<p_0$ and $j\le s$. Put $m=\abs{\cM}$, $I=\sum_\cM i$ and
+$J=\sum_\cM j$. Reflecting $i\mapsto D-\ell j-i$ for each fixed $j$ gives $2I+\ell J=Dm$. Writing
+$i=\ell u+r$ with $0\le r<\ell$, for each $r$ the pairs $(u,j)$ fill a triangle
+$u+j\le\lfloor(D-r)/\ell\rfloor$, symmetric in $u$ and $j$, so $\sum u=\sum j$ and
+$I=\sum(\ell u+r)\ge\ell\sum u=\ell J$. Therefore, as
+$Dm=2I+\ell J\le3I$,
+\begin{equation}\label{eq:counts}
+J\le I/\ell,\qquad m\le3I/D.
+\end{equation}
+
+\emph{A nonzero algebraic integer.} Let $N_1=\lceil p_0^{1/2}q^{1/4}\rceil$ and
+$N_2=\lceil p_0^{1/2}q^{-1/4}\rceil$. Then $N_1N_2\ge p_0$. Moreover, $N_1\le p_0$, because
+$p_0^{1/2}q^{1/4}\le p_0$ when $q\le p_0^2$, and $N_2\le\lceil p_0^{1/2}\rceil\le p_0$. Let $A$
+be the matrix over $\cO$ with rows indexed by $\cM$, ordered by increasing $i$, columns indexed by
+$(x,y,\kappa)$ with $0\le x<N_1$, $0\le y<N_2$ and $0\le\kappa\le s$, and entries
+\[
+A_{(i,j),(x,y,\kappa)}=\partial_z^\kappa\bigl(z^iw^j\bigr)(\alpha,\alpha')
+=(i)_\kappa\,\alpha^{i-\kappa}\alpha'^{j}\quad(\kappa\le i),\qquad\alpha=x+y\sd,
+\]
+and $0$ if $\kappa>i$, where $(i)_\kappa=i(i-1)\cdots(i-\kappa+1)$. Its rows are linearly
+independent modulo $p_0$. Indeed, a relation among them over the field $\cO/p_0\cO$ is a polynomial
+$F=\sum_\cM c_{ij}z^iw^j$ with $(\partial_z^\kappa F)(\bar\alpha,\bar\alpha^{p_0})=0$ for
+$\kappa\le s$ (Lemma~\ref{lem:frob}) at the $N_1N_2\ge p_0$ reductions $\bar\alpha$, which are
+distinct because $N_1,N_2\le p_0$ and $1,\sd$ are linearly independent over $\F_{p_0}$. As
+$\deg_zF\le D<p_0$, $\deg_wF\le s$ and $s+1\le p_0$, Lemma~\ref{lem:stepanov} with $t=s+1$ gives
+$F=0$. Hence we may fix an $m\times m$ minor $\delta\notin p_0\cO$ of $A$, which does not depend on the
+primes $p$ below. Let $\delta'$ be its image under $\sd\mapsto-\sd$, which is the same minor with
+$\alpha$ and $\alpha'$ interchanged. Then $n=\abs{\delta\delta'}$ is a positive integer, as
+$\delta\delta'\in\Z\setminus\{0\}$. (We pass to the norm because $\abs{\delta}$ itself can be small when $d>0$.)
+
+\emph{Its size.} Put $H=N_1+N_2\sqrt q$. As $\abs{\alpha},\abs{\alpha'}\le x+y\sqrt q<H$ and
+$(i)_\kappa\le D^s$, every entry in row $(i,j)$ of the matrices of $\delta$ and $\delta'$ has modulus
+at most $D^sH^{i+j}$, so that row has length at most $\sqrt m\,D^sH^{i+j}$. Hadamard's inequality, which
+bounds a determinant by the product of its row lengths, gives
+\begin{equation}\label{eq:upper}
+\log n\le2(I+J)\log H+2ms\log D+m\log m.
+\end{equation}
+
+\emph{Its divisibility.} Let $p$ be a prime with $\ell<p\le D$ and $\chi(p)=-1$. As $\ell\ge2$, $p$ is
+odd, so Lemma~\ref{lem:frob} applies. For $(i,j)\in\cM$ write $i=ph+v$ with $0\le v<p$, and replace
+the row of $z^iw^j$ by that of
+\[
+z^v(z^p-w)^hw^j=z^iw^j+\sum_{\nu=1}^{h}(-1)^\nu\binom h\nu z^{i-p\nu}w^{j+\nu}.
+\]
+The monomials in the sum have smaller $z$-degree and smaller $i+\ell j$, namely $i+\ell j-(p-\ell)\nu$, so they
+lie in $\cM$. Doing this for every
+row adds to each row integer multiples of rows of smaller $i$, a unitriangular change, so $\delta$,
+which uses every row, is unchanged. By Leibniz's rule,
+$\partial_z^\kappa\bigl(z^v(z^p-w)^hw^j\bigr)$ is an integer combination of products each containing
+$h$ factors $\partial_z^\lambda(z^p-w)$ with $\lambda\ge0$. Each such factor lies in $p\cO$ at
+$(\alpha,\alpha')$. For $\lambda=0$ this is Lemma~\ref{lem:frob}. For $1\le\lambda\le p$ it holds because
+$\partial_z^\lambda z^p=(p)_\lambda z^{p-\lambda}$ and $p\mid(p)_\lambda$, and for $\lambda>p$ the factor is
+zero. So the new row of $(i,j)$ lies in $p^h\cO$, hence $\delta\in p^{E_p}\cO$. Conjugating,
+$\delta'\in p^{E_p}\cO$, so $p^{2E_p}\mid n$ with
+\begin{equation}\label{eq:div}
+E_p=\sum_{(i,j)\in\cM}\Bigl\lfloor\frac ip\Bigr\rfloor\ge\frac Ip-m.
+\end{equation}
+
+\emph{Comparison.} As the pairwise coprime $p^{2E_p}$ all divide $n$, multiplying~\eqref{eq:div}
+by $2\log p$, summing over $p$ and using Chebyshev's bound $\sum_{p\le D}\log p\ll D$ give
+\[
+2I\sum_{\substack{\ell<p\le D\\ \chi(p)=-1}}\frac{\log p}p\le2\sum_pE_p\log p+O(mD)\le\log n+O(mD).
+\]
+Insert~\eqref{eq:upper} and divide by $2I$. By~\eqref{eq:counts}, we have
+$(I+J)/I\le1+1/\ell$, $ms/I\le3/\ell$ and $mD/I\le3$, and also $(m\log m)/I\le3(\log m)/D=O(1)$ since
+$m\le(D+1)^2$. Mertens'
+theorem gives $\log\ell+O(1)$ for the primes $p\le\ell$, so
+\begin{equation}\label{eq:shape}
+S_-(D)\le\log H+\frac{\log H+3\log D}\ell+\log\ell+O(1).
+\end{equation}
+Finally, $N_1\le p_0^{1/2}q^{1/4}+1$ and
+$N_2\sqrt q\le p_0^{1/2}q^{1/4}+\sqrt q$, and $1\le\sqrt q\le p_0^{1/2}q^{1/4}$ as $q\le p_0^2$.
+Hence $H\le4p_0^{1/2}q^{1/4}$ and $\log H\le\frac12\log D+\frac14\log q+O(1)$, and
+inserting this in~\eqref{eq:shape} gives
+\[
+S_-(D)\le\Bigl(1+\frac1\ell\Bigr)\Bigl(\frac12\log D+\frac14\log q\Bigr)+\frac3\ell\log D+\log\ell+O(1),
+\]
+which is the proposition, as $\frac12+\frac1{2\ell}+\frac3\ell=\frac12+\frac7{2\ell}$.
+\end{proof}
+
+\begin{remark}\label{rem:loglog}
+For some fields, changing the monomials or $\ell$ cannot remove the $\log\log X$ from an argument that uses the
+bounds~\eqref{eq:upper} and~\eqref{eq:div}; we sketch why. Let $\cM$ be a finite set of exponents closed under the change of basis at a prime $p$: if
+$(i,j)\in\cM$ and $i\ge p$, then $(i-p,j+1)\in\cM$. Then $I\le pJ+(p-1)m$. Indeed, in the class of pairs with
+$i\equiv r\pmod p$ and $\lfloor i/p\rfloor+j=k$, the pairs are $(r+p(k-j),j)$ and their $j$ form a run ending at $k$, so
+the mean of $j$ is at least $k/2$, and the mean of $i$ is at most $r$ plus $p$ times the mean of $j$. Suppose the change of
+basis is used at every inert prime above $\ell$, and an inert prime lies in $(\ell,2\ell]$. Then $J/I+m/I\ge1/(2\ell)$. The
+comparison charges both, $J$ through the term $2J\log H$ of~\eqref{eq:upper} and $m$ through the loss of $m$ in each
+$E_p$ of~\eqref{eq:div}, summed over the primes up to $D$, so together they cost at least about $(\log D)/(4\ell)$
+in~\eqref{eq:shape}, while the inert primes up to $\ell$ are lost. By the Chinese remainder theorem there are fields with $\log q\ll\log D$ in which every
+odd prime up to $c\log D$ is inert, and for them the two losses add up to at least $\log\log D-O(1)$ whatever $\ell$
+is. Removing the $\log\log X$ needs another mechanism, and would not improve Corollary~\ref{cor:siegel}, whose proof
+loses $O(\log\log q)$ at the primes dividing $q$ in any case.
+\end{remark}
+
+\section{Proof of Corollary~\ref{cor:siegel}}\label{sec:cor}
+
+A zero $\beta$ near $1$ makes $-L'/L(\sigma,\chi)$ very negative just to the right of $1$, while
+Theorem~\ref{thm:main} bounds it below. We track the constants, as Barreto~\cite{Barreto} does.
+
+\begin{proof}[Proof of Corollary~\ref{cor:siegel}]
+\emph{Lower bound for $-L'/L$.} Let $T(x)=\sum_{p\le x}\chi(p)(\log p)/p=S_+(x)-S_-(x)$, so that $T(x)=0$ for
+$1\le x<2$. The primes with $\chi(p)=0$ divide $q$, and
+\[
+\sum_{p\mid q}\frac{\log p}p\le\sum_{p\le\log q}\frac{\log p}p+\frac1{\log q}\sum_{p\mid q}\log p
+\le\log\log q+O(1).
+\]
+So Mertens' theorem gives $T(x)\ge\log x-2S_-(x)-O(\log\log q)$. Writing $\log^+=\max(\log,0)$,
+Theorem~\ref{thm:main} then gives some $K=\frac12\log q+O(\log\log q)$ with $K\ge\frac12\log q$ and
+\begin{equation}\label{eq:Tlower}
+T(x)\ge-K-2\log^+\log x\qquad(x\ge1),
+\end{equation}
+which is trivial for $x<3$, where $T(x)\ge-\frac12\log2>-K$. Let $0<u\le1$ and $\sigma=1+u$. The
+logarithmic derivative is an average of $T$ over logarithmic scales. By partial summation, and since
+the prime powers contribute $O(1)$ (as $\sum_p(\log p)/(p(p-1))$ converges),
+\[
+-\frac{L'}{L}(\sigma,\chi)=u\int_1^\infty T(x)\,x^{-u-1}\,dx+O(1).
+\]
+The weight $u\,x^{-u-1}$ has total mass $1$ and satisfies $u^2\int_1^\infty(\log x)\,x^{-u-1}\,dx=1$.
+Since $\log y\le y$, we have $\log^+\log x\le\log(1/u)+u\log x$, and so~\eqref{eq:Tlower} gives
+\begin{equation}\label{eq:Llower}
+-\frac{L'}{L}(\sigma,\chi)\ge-\frac12\log q-2\log\frac1u-O(\log\log q).
+\end{equation}
+
+\emph{Upper bound for $-L'/L$.} Let $L(\beta,\chi)=0$ with $0<\beta<1$. Taking real parts in the formula for
+$L'/L$ that comes from the Hadamard
+product~\cite[Ch.~12, (17)--(18), and Ch.~14, p.~89, (2)]{Davenport},
+\[
+-\frac{L'}{L}(\sigma,\chi)=\frac12\log\frac q\pi
++\frac12\frac{\Gamma'}{\Gamma}\Bigl(\frac{\sigma+\mathfrak a}2\Bigr)
+-\sum_\rho\operatorname{Re}\frac1{\sigma-\rho},\qquad \chi(-1)=(-1)^{\mathfrak a},\ \mathfrak a\in\{0,1\},
+\]
+where $\rho$ runs over the nontrivial zeros of $L(s,\chi)$, counted with multiplicity. The gamma
+term is bounded, as $(\sigma+\mathfrak a)/2\in(\frac12,\frac32]$, and every term of the sum is
+positive because $\operatorname{Re}\rho\le1<\sigma$. Keeping only $\rho=\beta$ and using~\eqref{eq:Llower},
+\begin{equation}\label{eq:key}
+\frac1{u+1-\beta}\le\log q+2\log\frac1u+O(\log\log q)\qquad(0<u\le1).
+\end{equation}
+
+\emph{Conclusion.} Put $\cL=\log q$ and $u=\cL^{-2}$, so that $u\cL=1/\cL$ and
+$\log(1/u)=2\log\cL$. By~\eqref{eq:key},
+\[
+(1-\beta)\cL\ge\frac{\cL}{\cL+O(\log\cL)}-\frac1\cL\ge1-O\Bigl(\frac{\log\cL}{\cL}\Bigr).
+\]
+This bound is empty for small $q$. To get $(1-\beta)\log q\gg1$ for every $q$, take $u=\eta/\cL$
+instead, with $0<\eta\le1$. Since $\log(1/u)=\log(1/\eta)+\log\cL\le\log(1/\eta)+\cL$,~\eqref{eq:key} gives
+$1/(u+1-\beta)\ll(1+\log(1/\eta))\cL$. Hence $(1-\beta)\cL\ge c_0/(1+\log(1/\eta))-\eta$ with $c_0>0$ absolute, and
+this is positive once $\eta$ is small enough.
+\end{proof}
+
+\begin{remark}\label{rem:const}
+The constant $1$ in Corollary~\ref{cor:siegel} is $1/(\frac12+2\cdot\frac14)$: the $\frac12$ comes from the conductor in the Hadamard formula, and $2\cdot\frac14$ from Theorem~\ref{thm:main}, as $S_-$ appears twice in
+$T=(S_++S_-)-2S_-$. The constant also depends on the coefficient of $\log X$ in Theorem~\ref{thm:main} being exactly
+$\frac12$, so that $2S_-$ cancels the $\log x$ of Mertens' theorem. With $\frac12+\varepsilon$ in its
+place, the right side of~\eqref{eq:key} would gain a term $2\varepsilon/u$, and the argument would give
+a constant below $1$.
+\end{remark}
+
+\section{Relation to other proofs}\label{sec:rel}
+
+The OpenAI proof~\cite{OpenAI}, expounded by Banks~\cite{Banks}, works over
+$\Q(\sqrt{d_0},\sqrt2)$, where $d_0$ is the squarefree part of $d$. As both note, it is an
+interpolation-determinant argument~\cite{Laurent}, with the smallness $p$-adic rather than
+archimedean, as in Dobrowolski's work on Lehmer's problem~\cite{Dobrowolski} (a connection noted by
+K.~Pratt in the comments to~\cite{Tao}), whose determinant form is due to Cantor and
+Straus~\cite{CantorStraus}.
+
+\emph{Divisibility.} All the proofs use the congruence $w\equiv z^p\pmod p$. Green~\cite{Green} works in
+$\Q(\sd)$ with the points $(\alpha,\alpha')$, takes $z$-derivatives and applies Leibniz's rule, and orders the rows by
+$z$-degree. We follow him in this. Where his main proof uses a Gram determinant, we use a nonzero minor,
+as a remark in~\cite[version~2, \S2]{Green} also suggests. The
+change of basis to $z^v(z^p-w)^h$ comes from~\cite{OpenAI}, in Kerr's form~\cite{Kerr}.
+
+\emph{Points and weights.} A square box of points, as in Green's proof, gives $\frac12\log q$, and
+Barreto's~\cite{Barreto} rectangular box gives $\frac14\log q$. A fixed weight, as in OpenAI's and Kerr's
+proofs, gives the bound at $X$ a fixed power of $q$, and a weight growing with $X$ costs $\log\log X$ (Remark~\ref{rem:loglog}).
+
+\emph{Nonvanishing.} OpenAI~\cite{OpenAI} uses an interpolation lemma with a greedy choice of monomial rows.
+Kerr~\cite{Kerr} constructs an auxiliary polynomial by the pigeonhole principle in place of a
+determinant, and Masser's zero estimate~\cite{Masser} shows that it cannot vanish at all the points.
+Green~\cite[Lemma~3.1]{Green} bounds multiplicities by resultants at any points with distinct
+second coordinates satisfying an incidence bound, which Schwartz--Zippel supplies. Barreto~\cite{Barreto} uses a Wronskian and a minor in $\Z$. Van Dijk~\cite{vanDijk} proves nonvanishing by the same root count, and his version~2 makes his proof explicit for class number one: an imaginary quadratic field of class number one has discriminant
+of absolute value below $8\cdot10^9$, and a finite sieve then leaves exactly the nine known fields.
+
+\section*{Authorship}
+The mathematics and text were produced by the AI systems named above, building on their version~1~\cite{v1}
+and the work cited above. Jacob Pescador initiated and coordinated the project and
+maintains this posting.
+
+\begin{thebibliography}{99}\footnotesize\raggedright\setlength{\itemsep}{0pt}
+\bibitem{Banks} W.\,D. Banks, \emph{On the OpenAI proof that Landau--Siegel zeros do not exist},
+preprint, version~1, 11 October 2026, \href{https://arxiv.org/abs/2610.15483v1}{arXiv:2610.15483v1}.
+\bibitem{Barreto} K. Barreto, \emph{An elementary proof of the non-existence of Landau--Siegel
+zeros}, posted on X (@AcerFur), 19 October 2026,
+\url{https://x.com/acerfur/status/2112239827077026128}, unavailable as of 20 October 2026; cited here from a copy.
+\bibitem{CantorStraus} D.\,C. Cantor and E.\,G. Straus, \emph{On a conjecture of D.\,H. Lehmer},
+Acta Arith. \textbf{42} (1982), 97--100; correction, ibid. \textbf{42} (1983), 327.
+\bibitem{Davenport} H. Davenport, \emph{Multiplicative Number Theory}, 2nd ed., revised by
+H.\,L. Montgomery, GTM 74, Springer, 1980.
+\bibitem{Dobrowolski} E. Dobrowolski, \emph{On a question of Lehmer and the number of irreducible
+factors of a polynomial}, Acta Arith. \textbf{34} (1979), 391--401.
+\bibitem{v1} GPT-6 Pro and Claude Opus 5.5, \emph{Landau--Siegel zeros and a Stepanov-type
+nonvanishing lemma}, preprint, version~1, 18 October 2026,
+\url{https://jacobpescador.github.io/ai-math/papers/landau-siegel-stepanov/v1/landau-siegel-stepanov.pdf}.
+\bibitem{Green} B. Green, \emph{On Landau--Siegel zeros}, preprint, version~1, 17 October 2026,
+\href{https://hexagonmath.org/abs/2610.00311v1}{hexagon:2610.00311v1}, and version~2, 18 October 2026,
+\href{https://hexagonmath.org/abs/2610.00311v2}{hexagon:2610.00311v2}.
+\bibitem{Kerr} B. Kerr, \emph{A simpler proof that there are no Landau--Siegel zeros}, preprint,
+version~1, 15 October 2026, \href{https://arxiv.org/abs/2610.21099v1}{arXiv:2610.21099v1}.
+\bibitem{Laurent} M. Laurent, \emph{Sur quelques r\'esultats r\'ecents de transcendance},
+Ast\'erisque \textbf{198--199--200} (1991), 209--230.
+\bibitem{Masser} D.\,W. Masser, \emph{On polynomials and exponential polynomials in several complex
+variables}, Invent. Math. \textbf{63} (1981), 81--95.
+\bibitem{OpenAI} OpenAI, \emph{Uniform exclusion of Landau--Siegel zeros}, preprint, 1 October 2026,
+\href{https://github.com/openai/math/blob/adc7f1241b42e322a6451854ab7e4b4c146bf78a/preprints/Uniform-exclusion-of-Landau-Siegel-zeros-October-1-2026/paper.pdf}{github.com/openai/math}.
+\bibitem{Stepanov} S.\,A. Stepanov, \emph{On the number of points of a hyperelliptic curve over a
+finite prime field}, Math. USSR-Izv. \textbf{3} (1969), 1103--1114.
+\bibitem{Tao} T. Tao, \href{https://terrytao.wordpress.com/2026/10/19/a-sketch-of-the-proof-of-non-existence-of-siegel-zeroes/}{\emph{A sketch of the proof of non-existence of Siegel zeroes}}, What's new (blog), 19 October 2026; comment cited: K.~Pratt, \#comment-698411.
+\bibitem{vanDijk} R. van Dijk, \emph{A Frobenius determinant proof of the non-existence of
+Landau--Siegel zeros}, preprint, version~1, 20 October 2026,
+\href{https://hexagonmath.org/abs/2610.00409v1}{hexagon:2610.00409v1}, and version~2, 21 October 2026,
+\href{https://hexagonmath.org/abs/2610.00409v2}{hexagon:2610.00409v2}.
+\end{thebibliography}
+
+\end{document}

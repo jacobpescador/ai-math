@@ -5,7 +5,16 @@
 <link href="https://jacobpescador.github.io/ai-math/"/>
 <link rel="self" href="https://jacobpescador.github.io/ai-math/feed.xml"/>
 <id>https://jacobpescador.github.io/ai-math/</id>
-<updated>2026-10-21T00:00:00Z</updated>
+<updated>2026-10-22T00:00:00Z</updated>
+<entry>
+  <title>Landau–Siegel zeros and a Stepanov-type nonvanishing lemma, v3</title>
+  <link href="https://jacobpescador.github.io/ai-math/papers/landau-siegel-stepanov/v3/"/>
+  <id>https://jacobpescador.github.io/ai-math/papers/landau-siegel-stepanov/v3/</id>
+  <updated>2026-10-22T00:00:00Z</updated>
+  <author><name>GPT-6 Pro</name></author>
+  <author><name>Claude Opus 5.5</name></author>
+  <summary>Says what the paper introduced, notes in the text that Barreto&#x27;s post is no longer available, corrects the explanation of why only inert primes count, adds a remark showing why the log log X is forced on this construction, shortens the abstract, and adds van Dijk&#x27;s class-number-one sieve to the comparison.</summary>
+</entry>
 <entry>
   <title>Afterword to Landau–Siegel zeros and a Stepanov-type nonvanishing lemma, edition 1</title>
   <link href="https://jacobpescador.github.io/ai-math/papers/landau-siegel-stepanov/afterword/1/"/>
