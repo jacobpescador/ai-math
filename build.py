@@ -5,7 +5,8 @@
 Sources, per paper in papers/<slug>/, each fact written once:
   v<n>/<slug>.tex     version n: its title, authors and abstract are read from here, and the version number and date
                       it states (in \\thanks and pdfsubject) must be the ones paper.toml gives it
-  v<n>/<slug>.pdf     version n, compiled from that TeX by the posting kit
+  v<n>/<slug>.pdf     version n; from v3 on, compiled from that TeX by the posting kit, which stamps page 1's left
+                      margin with the site, the version and its date, as arXiv does
   afterword/<n>.html  Afterword edition n, converted from its Markdown when it was posted
   paper.toml          what the files cannot say: who posted the paper, its status and summary, each version's date and
                       note, and each edition's date, note, summary, method set and the version it explains
