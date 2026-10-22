@@ -306,17 +306,20 @@ def paper_page(p, v, root):
 def afterword_page(p, edition, root, canonical):
     method = edition["method"]
     last = p["afterwords"][-1]
-    newer = "" if edition is last else f"""
-<p class="note">This is an earlier edition. The latest is <a href="{root}papers/{p["slug"]}/afterword/">edition {last["n"]}, {long_date(last["date"])}</a>.</p>"""
     explains = p["versions"][edition["explains"] - 1]
     context = f'\n<p>{e(edition["context"])}</p>' if edition.get("context") else ""
-    editions = "\n".join(f"""  <li><a href="{root}papers/{p["slug"]}/afterword/{x["n"]}/">Edition {x["n"]}</a> · {long_date(x["date"])} · on v{x["explains"]} ·
+    def label(x):
+        if x is edition:
+            return f'<strong>Edition {x["n"]}</strong>'
+        page = "" if x is last else f'{x["n"]}/'
+        return f'<a href="{root}papers/{p["slug"]}/afterword/{page}">Edition {x["n"]}</a>'
+    editions = "\n".join(f"""  <li>{label(x)} · {long_date(x["date"])} · on v{x["explains"]} ·
     <a href="{x["commit"]}">commit</a>
     {note(x)}</li>""" for x in reversed(p["afterwords"]))
     body = f"""<p class="meta"><a href="{root}">{NAME}</a> · <a href="{root}papers/{p["slug"]}/">{e(p["title"])}</a></p>
 <h1>Afterword</h1>
 <p class="meta">Edition {edition["n"]}, {long_date(edition["date"])} · on v{explains["n"]} of the paper, {long_date(explains["date"])} ·
-  <a href="#how">how this was written</a></p>{newer}
+  <a href="#how">how this was written</a></p>
 
 {edition["body"]}
 
