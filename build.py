@@ -140,6 +140,34 @@ def load_sets():
     return {int(n): s for n, s in sets.items()}
 
 
+def pdf_string(raw):
+    """A PDF literal string's bytes, its escapes undone, decoded as PDFDocEncoding or UTF-16 as its mark says."""
+    out, i = bytearray(), 0
+    while i < len(raw):
+        c = raw[i]
+        if c == 0x5C and i + 1 < len(raw):
+            m = re.match(rb"[0-7]{1,3}", raw[i + 1:i + 4])
+            if m:
+                out.append(int(m.group(), 8) & 0xFF); i += 1 + len(m.group()); continue
+            out.append({ord("n"): 10, ord("r"): 13, ord("t"): 9}.get(raw[i + 1], raw[i + 1])); i += 2; continue
+        out.append(c); i += 1
+    return out[2:].decode("utf-16-be") if out[:2] == b"\xfe\xff" else out.decode("latin-1")
+
+
+def version_statements(tex, pdf):
+    """Where a version names its own number and date: the TeX's pdfsubject and title footnote, and the PDF's Subject.
+    A version that names none (v1 of a paper posted as it was written) passes."""
+    source = tex.read_text()
+    found = [(f"{tex.name} pdfsubject", m.group(1)) for m in re.finditer(r"pdfsubject=\{[^}]*?(version \d+, \d{1,2} \w+ \d{4})", source)]
+    found += [(f"{tex.name} title footnote", m.group(1).replace("~", " ").replace("V", "v", 1))
+              for m in re.finditer(r"\\thanks\{(Version~\d+, \d{1,2} \w+ \d{4})", source)]
+    for m in re.finditer(rb"/Subject\s*\(((?:\\.|[^\\)])*)\)", pdf.read_bytes()):
+        stated = re.search(r"version \d+, \d{1,2} \w+ \d{4}", pdf_string(m.group(1)))
+        if stated:
+            found.append((f"{pdf.name} Subject", stated.group()))
+    return found
+
+
 def load_paper(directory, sets):
     slug = directory.name
     if not re.fullmatch(r"[a-z0-9]+(-[a-z0-9]+)*", slug):
@@ -166,6 +194,10 @@ def load_paper(directory, sets):
             at = len(os.path.commonprefix([site, source]))
             fail(f'{slug}: {version["abstract_file"]} differs from the abstract of {version["tex"]}:\n'
                  f'  site: …{site[max(at - 40, 0):at + 40]}…\n  TeX:  …{source[max(at - 40, 0):at + 40]}…')
+        expected = f'version {n}, {long_date(version["date"])}'
+        for where, stated in version_statements(directory / version["tex"], directory / version["pdf"]):
+            if stated != expected:
+                fail(f'{slug}: {where} says "{stated}", but paper.toml makes it {expected}')
     paper["latest"] = paper["versions"][-1]
     paper["pdf"] = f"{slug}.pdf"
     for n, edition in enumerate(paper.get("afterword", []), 1):
