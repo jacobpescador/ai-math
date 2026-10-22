@@ -12,11 +12,8 @@
 
 /* Warm paper and ink; links in amber. Every text colour meets WCAG AA on its background. */
 :root {
-  color-scheme: light dark;
+  color-scheme: light;
   --bg: #faf6ee; --fg: #24201a; --muted: #6b6356; --rule: #e4dccd; --code: #f3eee3; --link: #94540f; --mark: #f1dcb4;
-}
-@media (prefers-color-scheme: dark) {
-  :root { --bg: #1b1915; --fg: #e8e1d3; --muted: #a59c8c; --rule: #37322a; --code: #23201b; --link: #e5ad5e; --mark: #5a4320; }
 }
 
 /* 17 px on a phone, about 20 px at 1280 px, 23.5 px on a 1920 px projector; the measure grows with it. */
@@ -26,8 +23,6 @@ body {
   font: 1rem/1.6 "STIX Two Text", "Site Math", Georgia, serif;
   font-kerning: normal; font-variant-ligatures: common-ligatures; text-rendering: optimizeLegibility; overflow-wrap: break-word;
 }
-/* Light text on a dark ground blooms with subpixel-style smoothing; thin it back to the light mode's weight. */
-@media (prefers-color-scheme: dark) { body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; } }
 ::selection { background: var(--mark); }
 
 h1 { font-size: 1.75rem; font-weight: 600; line-height: 1.2; letter-spacing: -.005em; margin: .5rem 0 .6rem; text-wrap: balance; }
