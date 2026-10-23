@@ -154,6 +154,8 @@ def math(tex, display, defs={}):
     # before it after a symbol, number, fraction, script or closing parenthesis
     m = re.sub(rf"<mi>({SPACED})</mi>(?!<mo[^>]*>\(|</mrow>|</math>|<mspace)", r'<mi>\1</mi><mspace width="0.1667em"/>', m)
     m = re.sub(rf"(</mi>|</mn>|</mfrac>|</msub>|</msup>|</msqrt>|\)</mo>|</mstyle>)<mi>({SPACED})</mi>", r'\1<mspace width="0.1667em"/><mi>\2</mi>', m)
+    # a prime follows its letter, as TeX sets it: the glyph is already raised, so a superscript would lift it twice
+    m = re.sub(r"<msup>(<mi>[^<]*</mi>)<mi>([′″‴])</mi></msup>", r'\1<mi mathvariant="normal">\2</mi>', m)
     # a sign with no operand before it is unary, as TeX sets it: "= −1", not "= − 1"
     m = re.sub(r"(<mo[^>]*>[^<)\]|}!′⋯…]*</mo>|<mrow>|<mtd>|<math[^>]*>)<mo>([−+])</mo>", r'\1<mo form="prefix">\2</mo>', m)
     if not display:
