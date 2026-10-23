@@ -316,26 +316,24 @@ which is the proposition, as $\frac12+\frac1{2\ell}+\frac3\ell=\frac12+\frac7{2\
 \end{proof}
 
 \begin{remark}\label{rem:loglog}
-For a suitable family of fields, no choice of the monomials or of $\ell$ removes the $\log\log X$ from an argument
-that uses the bounds~\eqref{eq:upper} and~\eqref{eq:div}. Let $\cM$ be a finite set of exponents closed under the
-change of basis at a prime $p$: if $(i,j)\in\cM$ and $i\ge p$, then $(i-p,j+1)\in\cM$. Then $I\le pJ+(p-1)m$. Indeed,
-in the class of pairs with $i\equiv r\pmod p$ and $\lfloor i/p\rfloor+j=k$, the pairs are $(r+p(k-j),j)$ and their
-$j$ form a run ending at $k$, so the mean of $j$ is at least $k/2$, and the mean of $i$ is at most $r$ plus $p$ times
-the mean of $j$.
+For a suitable family of fields, no choice of the monomials or of the primes used removes the $\log\log X$ from an
+argument that uses~\eqref{eq:upper} and the divisibility that Lemma~\ref{lem:frob} gives along the lines $i+pj=c$.
+Let $\cM$ be any finite set of exponents with $i\le D$ and $I>0$, and $p$ an odd inert prime. Expanding $w^j=(z^p+(w-z^p))^j$ as in the proof, the $t_c$ points
+of $\cM$ on a line $i+pj=c$ give $\delta\in p^{E_p}\cO$ with $E_p=\sum_c\binom{t_c}2$, which is~\eqref{eq:div} for
+the triangle when $p>\ell$. These points have distinct $j\ge0$, summing to at least $\binom{t_c}2$, and distinct $i=c-pj\ge0$,
+congruent modulo $p$, summing to at least $p\binom{t_c}2$. Hence $E_p\le\min(J,I/p)$.
 
 Now let $L=\frac14\log D$. By the Chinese remainder theorem there is an $a\equiv1\pmod8$ with
 $a\le8p_0\prod_{3\le p\le L}p=p_0^{5/4+o(1)}$ that is a quadratic nonresidue modulo $p_0$ and modulo every odd prime
 up to $L$. None of these primes divides $a$, so the squarefree part $d$ of $a$ has the same residue symbols, $d\equiv
-a\equiv1\pmod 8$, and $d$ is a fundamental discriminant with $q=d\le p_0^2$ once $p_0$ is large, for which $p_0$ and every odd prime up to
-$L$ are inert. Suppose the change of basis is used at every inert prime above $\ell$ and the primes up to $\ell$ are
-left out. If $\ell\le L/2$, an inert prime lies in $(\ell,2\ell]$, so $J/I+m/I\ge1/(2\ell)$. In~\eqref{eq:shape}
-the term $2J\log H$ of~\eqref{eq:upper} costs $(J/I)\log H\ge(J/I)\frac12\log D$, and the loss of $m$ in each $E_p$
-of~\eqref{eq:div} costs $(m/I)\sum\log p$ over the inert $p\in(\ell,D]$, which is at least
-$(m/I)\sum_{\ell<p\le L}\log p\gg(m/I)\log D$. Together they cost $\gg(\log D)/\ell$, while the inert primes up to
-$\ell$ cost $\log\ell-O(1)$, and the sum is at least $\log\log D-O(1)$. If $\ell>L/2$, the inert primes up to $L/2$
-alone cost $\log\log D-O(1)$. The conductors of this family grow with $D$; the remark says nothing about one fixed
-field. Removing the $\log\log X$ needs another mechanism, and would not improve Corollary~\ref{cor:siegel}, whose
-proof loses $O(\log\log q)$ at the primes dividing $q$ in any case.
+a\equiv1\pmod 8$, and $d$ is a fundamental discriminant with $q=d\le p_0^2$ once $p_0$ is large, for which $p_0$ and
+every odd prime up to $L$ are inert. With $\rho=J/I$, the comparison in the proof bounds $S_-(D)$ by $\log H$ plus at
+least $\rho\log H+\sum(1/p-E_p/I)\log p$ over the inert $p\le D$, where $E_p=0$ at a prime not used. As
+$E_p/I\le\min(\rho,1/p)$ and $\log H\ge\frac12\log D$, the inert primes up to $x=\min(L,1/\rho)$ ($x=L$ if $J=0$) make this at least
+$\frac\rho2\log D+\log x-O(1)$, which is $\log\log D-O(1)$ or more whether $\rho\le1/L$ or not. The conductors of this
+family grow with $D$; the remark says nothing about one fixed field. Removing the $\log\log X$ needs another
+mechanism, and would not improve Corollary~\ref{cor:siegel}, whose proof loses $O(\log\log q)$ at the primes dividing
+$q$ in any case.
 \end{remark}
 
 \section{Proof of Corollary~\ref{cor:siegel}}\label{sec:cor}
